@@ -43,46 +43,53 @@ struct inscripcion
 
 int main()
 {
-    char resp;
-    printf("Men%c principal \n",164); 
-    printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripci%cn\n6.-Reportes\n7.-Salir\n", 162);
+    int opc;
 
-    do {
-        printf("Ingrese el codigo: \n");
-        scanf("%c", &resp);
-    }while (resp<1 &&resp>7);
-    
-    switch(resp){
-        case 1:
+    printf("\nMenu principal\n"); 
+    printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripcion\n6.-Reportes\n7.-Salir\n");
 
-            break;
+    do
+    {
+        printf("Seleccione la opción\n-> ");
+        scanf("%d", &opc);
+    } while (opc < 1 || opc > 7);
 
-        case 2:
+    while (opc != 7) {
+        switch(opc){
+            case 1:
+                // alumnos
+                break;
 
-            break;
+            case 2:
+                // materias
+                break;
 
-        case 3:
+            case 3:
+                // profesores
+                break;
 
-            break;
+            case 4:
+                // grupos
+                break;
 
-        case 4:
+            case 5:
+                // inscripcion
+                break;
 
-            break;
+            case 6:
+                // reportes
+                break;
+        }
 
-        case 5:
+        printf("\nMenu principal\n"); 
+        printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripcion\n6.-Reportes\n7.-Salir\n");
 
-            break;
-
-        case 6:
-
-            break;
-
-        case 7:
-
-            break;
-
+        do
+        {
+            printf("Seleccione la opción\n-> ");
+            scanf("%d", &opc);
+        } while (opc < 1 || opc > 7);
     }
-
 
     return 0;
 }
