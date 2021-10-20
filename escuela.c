@@ -43,46 +43,6 @@ struct inscripcion
 
 int main()
 {
-<<<<<<< HEAD
-    int resp;
-    printf("Menu principal \n"); 
-    printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripcion\n6.-Reportes\n7.-Salir\n");
-
-    do {
-        printf("Ingrese el codigo: \n");
-        scanf("%d", &resp);
-    }while (resp<1 &&resp>7);
-    
-    switch(resp){
-        case 1:
-
-            break;
-
-        case 2:
-
-            break;
-
-        case 3:
-
-            break;
-
-        case 4:
-
-            break;
-
-        case 5:
-
-            break;
-
-        case 6:
-
-            break;
-
-        case 7:
-
-            break;
-
-=======
     int opc;
 
     printf("\nMenu principal\n"); 
@@ -129,7 +89,6 @@ int main()
             printf("Seleccione la opción\n-> ");
             scanf("%d", &opc);
         } while (opc < 1 || opc > 7);
->>>>>>> 4d6fc07d393fc2430f408106fdbe6add687de565
     }
 
     return 0;
