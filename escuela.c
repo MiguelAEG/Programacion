@@ -2,51 +2,45 @@
 //#include "limpieza.h" 
 //#define fflush(stdin) limpieza()
 
-struct Alumn{
- long int Matricula;
- char nombre[40];
- char carrera[40];
- int semestre;
- int fecha_nac;
- char correo[40];
- int telefono;
+struct fecha
+{
+    int dia, mes, año;
 };
 
-struct materia{
- int clave;
- char nombre[40];
- int semestre;
+struct alumno
+{
+    long int matricula, telefono;
+    char nombre[40], carrera[40], correo[40];
+    int semestre;
+    struct fecha fecha_nac;
 };
 
-struct profesor{
- int num_empleado;
- char nombre[40];
- int coordinacion;
- int fecha_nac;
- char correo[40];
- int telefono;
+struct materia
+{
+    int clave, semestre;
+    char nombre[40];
 };
 
-struct fecha_nac{
- int dia;
- int mes;
- int año;
+struct profesor
+{
+    long int telefono;
+    int num_empleado, coordinacion;
+    char nombre[40], correo[40];
+    struct fecha fecha_nac;
 };
 
-struct grupo{
- int numero;
- int semestre;
- int clave;
- //Fecha actual
- int N_empleado;
+struct grupo
+{
+    int numero, semestre, claves[7], empleados[7];
+    //Fecha actual
 };
 
-struct inscripcion{
- int num;
- int matricula;
- //Fecha actual
- 
+struct inscripcion
+{
+    int grupo, matricula;
+    //Fecha actual
 };
+
 int main()
 {
     
