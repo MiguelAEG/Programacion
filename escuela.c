@@ -4,7 +4,7 @@
 
 struct fecha
 {
-    int dia, mes, año;
+    int dia, mes, ao;
 };
 
 struct alumno
@@ -43,7 +43,46 @@ struct inscripcion
 
 int main()
 {
+    char resp;
+    printf("Men%c principal \n",164); 
+    printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripci%cn\n6.-Reportes\n7.-Salir\n", 162);
+
+    do {
+        printf("Ingrese el codigo: \n");
+        scanf("%c", &resp);
+    }while (resp<1 &&resp>7);
     
-    
+    switch(resp){
+        case 1:
+
+            break;
+
+        case 2:
+
+            break;
+
+        case 3:
+
+            break;
+
+        case 4:
+
+            break;
+
+        case 5:
+
+            break;
+
+        case 6:
+
+            break;
+
+        case 7:
+
+            break;
+
+    }
+
+
     return 0;
 }
