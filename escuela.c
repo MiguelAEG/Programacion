@@ -1,30 +1,10 @@
 #include <stdio.h> 
-
-void limpieza();
-
+//#include "limpieza.h" 
+//#define fflush(stdin) limpieza()
 
 int main()
 {
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	return 0;}
-
-
-void limpieza()
-{
-  char arreglo[100];
-  gets(arreglo);
+    
+    
+    return 0;
 }
