@@ -2,6 +2,6 @@
 
 void limpieza()
 {
-  char arreglo[100];
-  gets(arreglo);
+    char arreglo[100];
+    gets(arreglo);
 }

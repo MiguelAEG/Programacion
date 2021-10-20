@@ -31,7 +31,7 @@ struct profesor
 
 struct grupo
 {
-    int numero, semestre, claves[7], empleados[7];
+    int numero, semestre, materias[7], profesores[7];
     //Fecha actual
 };
 
@@ -46,4 +46,4 @@ int main()
     
     
     return 0;
-};
+}
