@@ -82,14 +82,48 @@ int main()
     				case 7: Telefono(i);
     				default: break;
 			    }
-			
-            break;
+			break;
+
         case 2:
-            // materias
+            //Menu materias
+            printf("\n1.-Clave\n2.-Nombre\n3.-Semestre\n");
+            do {            
+                printf("Seleccione la opcion -> ");
+                scanf("%d", &opc2);
+            }while (opc2<1 || opc2 >3);
+            switch (opc2) {
+                case 1: 
+                break;
+                case 2:
+                break;
+                case 3:
+                break;
+                default: break;
+            }
             break;
 
         case 3:
-            // profesores
+            //Menu profesores
+            printf("\n1.-Numero\n2.-Nombre\n3.-Coordinacion\n4.-Fecha de nacimiento\n 5.-Correo\n6.-Telefono");
+            do {
+                printf("Selecciona la opcion -> ");
+                scanf("%d", &opc2);
+            }while (opc2<1 || opc2>6);
+            switch (opc2) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                    default: break;
+            }
             break;
 
         case 4:
