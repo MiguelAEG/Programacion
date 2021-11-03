@@ -123,7 +123,7 @@ void Matricula( int i)
 	do
 	{
 		printf("\nIngrese la matricula del alumno %d: ", i+1);
-		scanf("%d", &persona[i].matricula);
+		scanf("%ld", &persona[i].matricula);
 	}while(persona[i].matricula <= 0);
   	return;
 }
@@ -212,7 +212,7 @@ void Telefono(int i)
 	do
 	{
 		printf("Ingrese el telefono del alumno %d:", i+1);
-		scanf("%d", &persona[i].telefono);
+		scanf("%ld", &persona[i].telefono);
 	}while(persona[i].telefono<10);
 	return;
 }
