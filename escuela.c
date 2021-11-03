@@ -57,31 +57,31 @@ int main()
     
     switch(opc){
         case 1:
-                // menu alumnos 
-                printf("1.-Matricula\n2.-Nombre\n3.-Carrera\n4.-Semestre\n5.-Fecha de Nacimiento \n6.-Correo\n7.-Telefono\n");
-                do
-    			{
-        			printf("Seleccione la opcion-> ");
-        			scanf("%d", &opc2);
-    			} while (opc2 < 1 || opc2 > 7);
-    			
-    			switch(opc2)
-    			{
-    				case 1: Matricula(i);
-    					break;
-    				case 2: Nombre(i);
-    					break;
-    				case 3: Carrera(i);
-    					break;
-    				case 4: Semestre(i);
-    				    break;
-    				case 5: Fecha_nac(i);
-    				    break;
-    				case 6: Correo(i);
-    				    break;
-    				case 7: Telefono(i);
-    				default: break;
-			    }
+            // menu alumnos 
+            printf("1.-Matricula\n2.-Nombre\n3.-Carrera\n4.-Semestre\n5.-Fecha de Nacimiento \n6.-Correo\n7.-Telefono\n");
+            do
+            {
+                printf("Seleccione la opcion-> ");
+                scanf("%d", &opc2);
+            } while (opc2 < 1 || opc2 > 7);
+            
+            switch(opc2)
+            {
+                case 1: Matricula(i);
+                    break;
+                case 2: Nombre(i);
+                    break;
+                case 3: Carrera(i);
+                    break;
+                case 4: Semestre(i);
+                    break;
+                case 5: Fecha_nac(i);
+                    break;
+                case 6: Correo(i);
+                    break;
+                case 7: Telefono(i);
+                default: break;
+            }
 			break;
 
         case 2:
@@ -261,7 +261,7 @@ void Fecha_nac(int i)
 	}while(persona[i].fecha_nac.mmm<1||persona[i].fecha_nac.mmm>12);
 	do
 	{
-		printf("Ingrese el año de nacimiento del alumno %d", i+1);
+		printf("Ingrese el aï¿½o de nacimiento del alumno %d", i+1);
 		scanf("%d", &persona[i].fecha_nac.aaaa);
 	}while(persona[i].fecha_nac.aaaa<=0||persona[i].fecha_nac.aaaa>2021);
 	return;
