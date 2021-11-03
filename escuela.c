@@ -127,15 +127,64 @@ int main()
             break;
 
         case 4:
-            // grupos
+            // Menu grupos
+            printf("\n1.-Numero\n2.-Semestre\n3.-Numero de materia\n4.-Clave del profesor\n");
+            do {
+                printf("Selecciona la opcion -> ");
+                scanf("%d", &opc2);
+            }while (opc2<1 || opc2>4);
+            switch (opc2) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                    default: break;
+            }
             break;
 
         case 5:
-            // inscripcion
+            // Menu inscripcion
+            printf("\n1.-Numero\n2.-Matricula\n"); 
+            do {
+                printf("Selecciona la opcion -> ");
+                scanf("%d", &opc2);
+            }while (opc2<1 || opc2>2);
+            switch (opc2) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default: break;
+            }
             break;
-
         case 6:
-            // reportes
+            // menu reportes
+             printf("\n1.-Listado de alumnos por carrera\n2.-Listado de materias que imparte un profesor\n3.-Listado de grupos por fecha\n4.-Listado de inscripcion por grupo\n5.- Generar archivo de alumnos\n6.-Generar archivo de profesores\n7.-Mostrar archivo\n8.-Salir\n");
+            do {
+                printf("Selecciona la opcion -> ");
+                scanf("%d", &opc2);
+            }while (opc2<1 || opc2>8);
+            switch (opc2) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                    default: break;
+            }
             break;
     }
 
