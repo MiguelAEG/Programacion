@@ -67,20 +67,29 @@ int main()
             
             switch(opc2)
             {
-                case 1: Matricula(i);
+                case 1:
+                    Matricula(i);
                     break;
-                case 2: Nombre(i);
+                case 2: 
+                    Nombre(i);
                     break;
-                case 3: Carrera(i);
+                case 3: 
+                    Carrera(i);
                     break;
-                case 4: Semestre(i);
+                case 4: 
+                    Semestre(i);
                     break;
-                case 5: Fecha_nac(i);
+                case 5: 
+                    Fecha_nac(i);
                     break;
-                case 6: Correo(i);
+                case 6: 
+                    Correo(i);
                     break;
-                case 7: Telefono(i);
-                default: break;
+                case 7: 
+                    Telefono(i);
+                    break;
+                default: 
+                    break;
             }
 			break;
 
