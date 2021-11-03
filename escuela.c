@@ -1,6 +1,6 @@
 #include <stdio.h> 
 #include<conio.h>
-
+#include <time.h>
 struct fecha
 {
     int dd, mmm, aaaa;
@@ -101,12 +101,12 @@ int main()
                 scanf("%d", &opc2);
             }while (opc2<1 || opc2 >3);
             switch (opc2) {
-                case 1: 
-                break;
+                case 1:
+                    break;
                 case 2:
-                break;
+                    break;
                 case 3:
-                break;
+                    break;
                 default: break;
             }
             break;
@@ -307,4 +307,15 @@ void Telefono(int i)
 		scanf("%ld", &persona[i].telefono);
 	}while(persona[i].telefono<10);
 	return;
+}
+
+void tiempo(int argc,char* argv[]) {
+
+        time_t tiempo = time(0);
+        struct tm *tlocal = localtime(&tiempo);
+        char output[128];
+        strftime(output,128,"%d/%m/%y %H:%M:%S",tlocal);
+        printf("%s\n",output);
+
+        return;
 }
