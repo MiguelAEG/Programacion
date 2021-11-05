@@ -309,13 +309,16 @@ void Telefono(int i)
 	return;
 }
 
-void tiempo(int argc,char* argv[]) {
+void tiempo() {
 
-        time_t tiempo = time(0);
-        struct tm *tlocal = localtime(&tiempo);
-        char output[128];
-        strftime(output,128,"%d/%m/%y %H:%M:%S",tlocal);
-        printf("%s\n",output);
+    time_t t;
+    struct tm *tm;
+    char fechayhora[100];
 
-        return;
+    t=time(NULL);
+    tm=localtime(&t);
+    strftime(fechayhora, 100, "%d/%m/%Y", tm);
+    printf("Hoy es: %s\n", fechayhora);
+
+    return;
 }
