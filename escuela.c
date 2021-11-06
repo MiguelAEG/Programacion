@@ -40,6 +40,7 @@ struct inscripcion
     //Fecha actual
 };
 
+int menuPrincipal();
 void matricula(int);
 void nombre(int);
 void carrera(int);
@@ -51,183 +52,190 @@ void tiempo();
 
 int main()
 {
-    int opc, opc2;
-
-    printf("\nMenu principal\n"); 
-    printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripcion\n6.-Reportes\n7.-Salir\n");
-
-    do
-    {
-        printf("Seleccione la opción\n-> ");
-        scanf("%d", &opc);
-    } while (opc < 1 || opc > 7);
- 	
+    int opcion, opc2;
  	int i = 0;		
     
-    switch(opc){
-        case 1:
-            // menu alumnos 
-            printf("1.-Matricula\n2.-Nombre\n3.-Carrera\n4.-Semestre\n5.-Fecha de Nacimiento \n6.-Correo\n7.-Telefono\n");
+    while ((opcion = menuPrincipal()) != 7) {
+        switch(opcion){
+            case 1:
+                // menu alumnos 
+                printf("1.-Matricula\n2.-Nombre\n3.-Carrera\n4.-Semestre\n5.-Fecha de Nacimiento \n6.-Correo\n7.-Telefono\n");
 
-            do
-            {
-                printf("Seleccione la opcion-> ");
-                scanf("%d", &opc2);
-            } while (opc2 < 1 || opc2 > 7);
-            
-            switch(opc2)
-            {
-                case 1:
-                    matricula(i);
-                    break;
-                case 2: 
-                    nombre(i);
-                    break;
-                case 3: 
-                    carrera(i);
-                    break;
-                case 4: 
-                    semestre(i);
-                    break;
-                case 5: 
-                    fecha_nac(i);
-                    break;
-                case 6: 
-                    correo(i);
-                    break;
-                case 7: 
-                    telefono(i);
-                    break;
-            }
+                do
+                {
+                    printf("Seleccione la opcion-> ");
+                    scanf("%d", &opc2);
+                } while (opc2 < 1 || opc2 > 7);
+                
+                switch(opc2)
+                {
+                    case 1:
+                        matricula(i);
+                        break;
+                    case 2: 
+                        nombre(i);
+                        break;
+                    case 3: 
+                        carrera(i);
+                        break;
+                    case 4: 
+                        semestre(i);
+                        break;
+                    case 5: 
+                        fecha_nac(i);
+                        break;
+                    case 6: 
+                        correo(i);
+                        break;
+                    case 7: 
+                        telefono(i);
+                        break;
+                }
 
-			break;
+                break;
 
-        case 2:
-            //Menu materias
-            printf("\n1.-Clave\n2.-Nombre\n3.-Semestre\n");
+            case 2:
+                //Menu materias
+                printf("\n1.-Clave\n2.-Nombre\n3.-Semestre\n");
 
-            do {            
-                printf("Seleccione la opcion -> ");
-                scanf("%d", &opc2);
-            } while (opc2 < 1 || opc2 > 3);
+                do {            
+                    printf("Seleccione la opcion -> ");
+                    scanf("%d", &opc2);
+                } while (opc2 < 1 || opc2 > 3);
 
-            switch (opc2) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
+                switch (opc2) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
 
-            break;
+                break;
 
-        case 3:
-            //Menu profesores
-            printf("\n1.-Numero\n2.-Nombre\n3.-Coordinacion\n4.-Fecha de nacimiento\n 5.-Correo\n6.-Telefono");
+            case 3:
+                //Menu profesores
+                printf("\n1.-Numero\n2.-Nombre\n3.-Coordinacion\n4.-Fecha de nacimiento\n 5.-Correo\n6.-Telefono");
 
-            do {
-                printf("Selecciona la opcion -> ");
-                scanf("%d", &opc2);
-            } while (opc2 < 1 || opc2 > 6);
+                do {
+                    printf("Selecciona la opcion -> ");
+                    scanf("%d", &opc2);
+                } while (opc2 < 1 || opc2 > 6);
 
-            switch (opc2) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-            }
+                switch (opc2) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                }
 
-            break;
+                break;
 
-        case 4:
-            // Menu grupos
-            printf("\n1.-Numero\n2.-Semestre\n3.-Numero de materia\n4.-Clave del profesor\n");
+            case 4:
+                // Menu grupos
+                printf("\n1.-Numero\n2.-Semestre\n3.-Numero de materia\n4.-Clave del profesor\n");
 
-            do {
-                printf("Selecciona la opcion -> ");
-                scanf("%d", &opc2);
-            } while (opc2 < 1 || opc2 > 4);
+                do {
+                    printf("Selecciona la opcion -> ");
+                    scanf("%d", &opc2);
+                } while (opc2 < 1 || opc2 > 4);
 
-            switch (opc2) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-            }
+                switch (opc2) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
 
-            break;
+                break;
 
-        case 5:
-            // Menu inscripcion
-            printf("\n1.-Numero\n2.-Matricula\n"); 
+            case 5:
+                // Menu inscripcion
+                printf("\n1.-Numero\n2.-Matricula\n"); 
 
-            do {
-                printf("Selecciona la opcion -> ");
-                scanf("%d", &opc2);
-            } while (opc2 < 1 || opc2 > 2);
-            
-            switch (opc2) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-            }
+                do {
+                    printf("Selecciona la opcion -> ");
+                    scanf("%d", &opc2);
+                } while (opc2 < 1 || opc2 > 2);
+                
+                switch (opc2) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
 
-            break;
-        case 6:
-            // menu reportes
-            printf("\n1.-Listado de alumnos por carrera\n2.-Listado de materias que imparte un profesor\n3.-Listado de grupos por fecha\n4.-Listado de inscripcion por grupo\n5.- Generar archivo de alumnos\n6.-Generar archivo de profesores\n7.-Mostrar archivo\n8.-Salir\n");
+                break;
+            case 6:
+                // menu reportes
+                printf("\n1.-Listado de alumnos por carrera\n2.-Listado de materias que imparte un profesor\n3.-Listado de grupos por fecha\n4.-Listado de inscripcion por grupo\n5.- Generar archivo de alumnos\n6.-Generar archivo de profesores\n7.-Mostrar archivo\n8.-Salir\n");
 
-            do {
-                printf("Selecciona la opcion -> ");
-                scanf("%d", &opc2);
-            } while (opc2 < 1 || opc2 > 8);
+                do {
+                    printf("Selecciona la opcion -> ");
+                    scanf("%d", &opc2);
+                } while (opc2 < 1 || opc2 > 8);
 
-            switch (opc2) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-            }
+                switch (opc2) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                }
 
-            break;
+                break;
+
+        }
     }
-
-    printf("\nMenu principal\n"); 
-    printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripcion\n6.-Reportes\n7.-Salir\n");
-
-    do
-    {
-        printf("Seleccione la opción\n-> ");
-        scanf("%d", &opc);
-    } while (opc < 1 || opc > 7);
 
     return 0;
 }
-//Funciones para los datos de alumnos
+
+int menuPrincipal()
+{
+    int opcionMenuP;
+
+    printf("\nMenu principal\n"
+        "1) Alumnos\n"
+        "2) Materias\n"
+        "3) Profesores\n"
+        "4) Grupos\n"
+        "5) Inscripcion\n"
+        "6) Reportes\n"
+        "7) Salir\n");
+
+    do
+    {
+        printf("Seleccionar una opción\n? ");
+        scanf("%d", &opcionMenuP);
+    } while (opcionMenuP < 1 || opcionMenuP > 7);
+
+    return opcionMenuP;
+}
+
+// Funciones para los datos de alumnos
 void matricula(int i)
 {
 	do
