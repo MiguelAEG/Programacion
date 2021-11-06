@@ -125,14 +125,14 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             printf("\n2) Nombre: ");
             fflush(stdin);
             gets(alumnos[*offset].nombre);
-        } while (strlen(alumnos[*offset].nombre) == 0);
+        } while (strlen(alumnos[*offset].nombre) == 0); // Longitud al menos 1
 
         do
         {
             printf("\n3) Carrera: ");
             fflush(stdin);
             gets(alumnos[*offset].carrera);
-        } while (strlen(alumnos[*offset].carrera) == 0);
+        } while (strlen(alumnos[*offset].carrera) == 0); // Longitud al menos 1. No lo pide pero es bueno añadirlo
         
         do
         {
@@ -147,15 +147,15 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             printf("\n6) Correo electronico (Debe tener \'@\' y \'.\'): ");
             fflush(stdin);
             gets(alumnos[*offset].correo);
-        } while (strchr(alumnos[*offset].correo, '@') == NULL || strchr(alumnos[*offset].correo, '.') == NULL);
+        } while (strchr(alumnos[*offset].correo, '@') == NULL || strchr(alumnos[*offset].correo, '.') == NULL); // strchr regresa NULL si no se encontro el caracter
 
         do
         {
             printf("\n7) Telefono (10 digitos): ");
             scanf("%lld", &alumnos[*offset].telefono);
-        } while (alumnos[*offset].telefono < 1000000000LL || alumnos[*offset].telefono > 9999999999LL);
+        } while (alumnos[*offset].telefono < 1000000000LL || alumnos[*offset].telefono > 9999999999LL); //LL es de long long int para que sea posible comparar los numeros grandes
 
-        *offset++;
+        *offset++; // Aumenta la cantidad de alumnos
 
         do
         {
