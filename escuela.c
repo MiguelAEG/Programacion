@@ -44,6 +44,7 @@ struct inscripcion
 int main()
 {
     int opcion;
+    struct alumno alumnos[100];
 
     while ((opcion = escogerModo()) != 7) {
         switch(opcion){
