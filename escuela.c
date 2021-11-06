@@ -1,5 +1,5 @@
 #include <stdio.h> 
-#include<conio.h>
+#include <conio.h>
 #include <time.h>
 struct fecha
 {
@@ -12,7 +12,7 @@ struct alumno
     char nombre[40], carrera[40], correo[40];
     int semestre;
     struct fecha fecha_nac;
-}persona[100];
+} persona[100];
 
 struct materia
 {
@@ -40,6 +40,15 @@ struct inscripcion
     //Fecha actual
 };
 
+void matricula(int);
+void nombre(int);
+void carrera(int);
+void semestre(int);
+void fecha_nac(int);
+void correo(int);
+void telefono(int);
+void tiempo();
+
 int main()
 {
     int opc, opc2;
@@ -59,6 +68,7 @@ int main()
         case 1:
             // menu alumnos 
             printf("1.-Matricula\n2.-Nombre\n3.-Carrera\n4.-Semestre\n5.-Fecha de Nacimiento \n6.-Correo\n7.-Telefono\n");
+
             do
             {
                 printf("Seleccione la opcion-> ");
@@ -68,38 +78,39 @@ int main()
             switch(opc2)
             {
                 case 1:
-                    Matricula(i);
+                    matricula(i);
                     break;
                 case 2: 
-                    Nombre(i);
+                    nombre(i);
                     break;
                 case 3: 
-                    Carrera(i);
+                    carrera(i);
                     break;
                 case 4: 
-                    Semestre(i);
+                    semestre(i);
                     break;
                 case 5: 
-                    Fecha_nac(i);
+                    fecha_nac(i);
                     break;
                 case 6: 
-                    Correo(i);
+                    correo(i);
                     break;
                 case 7: 
-                    Telefono(i);
-                    break;
-                default: 
+                    telefono(i);
                     break;
             }
+
 			break;
 
         case 2:
             //Menu materias
             printf("\n1.-Clave\n2.-Nombre\n3.-Semestre\n");
+
             do {            
                 printf("Seleccione la opcion -> ");
                 scanf("%d", &opc2);
-            }while (opc2<1 || opc2 >3);
+            } while (opc2 < 1 || opc2 > 3);
+
             switch (opc2) {
                 case 1:
                     break;
@@ -107,17 +118,19 @@ int main()
                     break;
                 case 3:
                     break;
-                default: break;
             }
+
             break;
 
         case 3:
             //Menu profesores
             printf("\n1.-Numero\n2.-Nombre\n3.-Coordinacion\n4.-Fecha de nacimiento\n 5.-Correo\n6.-Telefono");
+
             do {
                 printf("Selecciona la opcion -> ");
                 scanf("%d", &opc2);
-            }while (opc2<1 || opc2>6);
+            } while (opc2 < 1 || opc2 > 6);
+
             switch (opc2) {
                 case 1:
                     break;
@@ -131,17 +144,19 @@ int main()
                     break;
                 case 6:
                     break;
-                    default: break;
             }
+
             break;
 
         case 4:
             // Menu grupos
             printf("\n1.-Numero\n2.-Semestre\n3.-Numero de materia\n4.-Clave del profesor\n");
+
             do {
                 printf("Selecciona la opcion -> ");
                 scanf("%d", &opc2);
-            }while (opc2<1 || opc2>4);
+            } while (opc2 < 1 || opc2 > 4);
+
             switch (opc2) {
                 case 1:
                     break;
@@ -151,32 +166,36 @@ int main()
                     break;
                 case 4:
                     break;
-                    default: break;
             }
+
             break;
 
         case 5:
             // Menu inscripcion
             printf("\n1.-Numero\n2.-Matricula\n"); 
+
             do {
                 printf("Selecciona la opcion -> ");
                 scanf("%d", &opc2);
-            }while (opc2<1 || opc2>2);
+            } while (opc2 < 1 || opc2 > 2);
+            
             switch (opc2) {
                 case 1:
                     break;
                 case 2:
                     break;
-                default: break;
             }
+
             break;
         case 6:
             // menu reportes
-             printf("\n1.-Listado de alumnos por carrera\n2.-Listado de materias que imparte un profesor\n3.-Listado de grupos por fecha\n4.-Listado de inscripcion por grupo\n5.- Generar archivo de alumnos\n6.-Generar archivo de profesores\n7.-Mostrar archivo\n8.-Salir\n");
+            printf("\n1.-Listado de alumnos por carrera\n2.-Listado de materias que imparte un profesor\n3.-Listado de grupos por fecha\n4.-Listado de inscripcion por grupo\n5.- Generar archivo de alumnos\n6.-Generar archivo de profesores\n7.-Mostrar archivo\n8.-Salir\n");
+
             do {
                 printf("Selecciona la opcion -> ");
                 scanf("%d", &opc2);
-            }while (opc2<1 || opc2>8);
+            } while (opc2 < 1 || opc2 > 8);
+
             switch (opc2) {
                 case 1:
                     break;
@@ -192,8 +211,8 @@ int main()
                     break;
                 case 8:
                     break;
-                    default: break;
             }
+
             break;
     }
 
@@ -209,18 +228,18 @@ int main()
     return 0;
 }
 //Funciones para los datos de alumnos
-void Matricula( int i)
+void matricula(int i)
 {
-	
 	do
 	{
 		printf("\nIngrese la matricula del alumno %d: ", i+1);
 		scanf("%ld", &persona[i].matricula);
-	}while(persona[i].matricula <= 0);
+	} while(persona[i].matricula <= 0);
+
   	return;
 }
 
-void Nombre( int i)
+void nombre(int i)
 {
 	int j= 0;
 	int cont = 0;
@@ -229,7 +248,7 @@ void Nombre( int i)
 		printf("Ingrese el nombre del alumno %d:", i+1);
 		fflush(stdin);
 		gets(persona[i].nombre);
-		for(j=0; persona[i].nombre != '\0';j++)
+		for(j=0; persona[i].nombre != '\0'; j++) // FIXME: nononononono esto esta mal muy muy mal aaaaaaaaaaaaaaaa
     	{
 	    	cont=cont + 1;
     	}
@@ -238,7 +257,7 @@ void Nombre( int i)
 	return;
 }
 
-void Carrera(int i)
+void carrera(int i)
 {
 	printf("Ingrese la carrera del alumno %d:", i+1);
 	fflush(stdin);
@@ -246,37 +265,37 @@ void Carrera(int i)
 	return;
 }
 
-void Semestre(int i)
+void semestre(int i)
 {
 	do
 	{
 		printf("Ingrese el semestre del alumno %d:", i+1);
 		scanf("%d", &persona[i].semestre);
-	}while(persona[i].semestre<1||persona[i].semestre>10);
-	return;
+	} while (persona[i].semestre < 1 || persona[i].semestre > 10);
 }
 
-void Fecha_nac(int i)
+void fecha_nac(int i)
 {
 	do
 	{
 		printf("Ingrese el dia de nacimiento del alumno %d:", i+1);
 		scanf("%d", &persona[i].fecha_nac.dd);
-	}while(persona[i].fecha_nac.dd<1||persona[i].fecha_nac.dd>31);
+	}while (persona[i].fecha_nac.dd < 1 || persona[i].fecha_nac.dd > 31);
+
 	do
 	{
 		printf("Ingrese el mes de nacimiento del alumno %d:", i+1);
 		scanf("%d", &persona[i].fecha_nac.mmm);
-	}while(persona[i].fecha_nac.mmm<1||persona[i].fecha_nac.mmm>12);
+	} while (persona[i].fecha_nac.mmm < 1 || persona[i].fecha_nac.mmm > 12);
+
 	do
 	{
-		printf("Ingrese el a�o de nacimiento del alumno %d", i+1);
+		printf("Ingrese el a%co de nacimiento del alumno %d", 164, i+1); // Aqui si fue necesario usar esto xd
 		scanf("%d", &persona[i].fecha_nac.aaaa);
-	}while(persona[i].fecha_nac.aaaa<=0||persona[i].fecha_nac.aaaa>2021);
-	return;
+	} while (persona[i].fecha_nac.aaaa <= 0 || persona[i].fecha_nac.aaaa > 2021);
 }
-void Correo(int i )
-{
+void correo(int i)
+{/* FIXME: usar strchr()
 	char dato='@', band;
 	int j=0;
 
@@ -291,34 +310,32 @@ void Correo(int i )
 			band= 'V';
 		}
 		i++;
-	}
-	if(band == 'F')
+	} 
+
+	if(band == 'F') // FIXME: pasar esto a 1 y 0
 	{
 		printf("El correo ingresado no lleva @ ");
-	}
-	return;
+	} */
 }
 
-void Telefono(int i)
+void telefono(int i)
 {
 	do
 	{
 		printf("Ingrese el telefono del alumno %d:", i+1);
 		scanf("%ld", &persona[i].telefono);
-	}while(persona[i].telefono<10);
-	return;
+	} while (persona[i].telefono < 10); // FIXME: esta validacion no me parece correcta...
 }
 
-void tiempo() {
+void tiempo()
+{ //TODO: convertir esto en algo que se pueda guardar en la estructura
 
-    time_t t;
+    time_t t; //TODO: nombres de variables mas descriptivos
     struct tm *tm;
     char fechayhora[100];
 
-    t=time(NULL);
-    tm=localtime(&t);
+    t = time(NULL);
+    tm = localtime(&t);
     strftime(fechayhora, 100, "%d/%m/%Y", tm);
     printf("Hoy es: %s\n", fechayhora);
-
-    return;
 }
