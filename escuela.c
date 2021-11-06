@@ -43,19 +43,10 @@ struct inscripcion
 
 int main()
 {
-    int opc;
+    int opcion;
 
-    printf("\nMenu principal\n"); 
-    printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripcion\n6.-Reportes\n7.-Salir\n");
-
-    do
-    {
-        printf("Seleccione la opción\n-> ");
-        scanf("%d", &opc);
-    } while (opc < 1 || opc > 7);
-
-    while (opc != 7) {
-        switch(opc){
+    while ((opcion = escogerModo()) != 7) {
+        switch(opcion){
             case 1:
                 // alumnos
                 break;
@@ -79,17 +70,31 @@ int main()
             case 6:
                 // reportes
                 break;
+            
         }
-
-        printf("\nMenu principal\n"); 
-        printf("1.-Alumnos\n2.-Materias\n3.-Profesor\n4.-Grupo\n5.-Inscripcion\n6.-Reportes\n7.-Salir\n");
-
-        do
-        {
-            printf("Seleccione la opción\n-> ");
-            scanf("%d", &opc);
-        } while (opc < 1 || opc > 7);
     }
 
     return 0;
+}
+
+int escogerModo()
+{
+    int opcionMenuP;
+
+    printf("\nMenu principal\n"
+        "1) Alumnos\n"
+        "2) Materias\n"
+        "3) Profesores\n"
+        "4) Grupos\n"
+        "5) Inscripcion\n"
+        "6) Reportes\n"
+        "7) Salir\n");
+
+    do
+    {
+        printf("Seleccionar una opción\n? ");
+        scanf("%d", &opcionMenuP);
+    } while (opcionMenuP < 1 || opcionMenuP > 7);
+
+    return opcionMenuP;
 }
