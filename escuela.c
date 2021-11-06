@@ -34,13 +34,13 @@ struct profesor
 struct grupo
 {
     int numero, semestre, materias[7], profesores[7];
-    //Fecha actual
+    struct fecha fechaActual;
 };
 
 struct inscripcion
 {
     int grupo, matricula;
-    //Fecha actual
+    struct fecha fechaActual;
 };
 
 int escogerModo(void);
@@ -54,7 +54,7 @@ int main()
     contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
     while ((opcion = escogerModo()) != 7) 
     {
-        switch(opcion)
+        switch(opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
         {
             case 1:
                 ingresarAlumnos(listaAlumnos, &contAlumnos);
@@ -110,44 +110,58 @@ int escogerModo()
 
 void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
 {
-    do
-    {
-        printf("\n1) Matricula (Mayor que cero): ");
-        scanf("%ld", &alumnos[*offset].matricula);
-    } while (alumnos[*offset].matricula <= 0);
+    char res;
 
     do
     {
-        printf("\n2) Nombre: ");
-        fflush(stdin);
-        gets(alumnos[*offset].nombre);
-    } while (strlen(alumnos[*offset].nombre) == 0);
+        do
+        {
+            printf("\n1) Matricula (Mayor que cero): ");
+            scanf("%ld", &alumnos[*offset].matricula);
+        } while (alumnos[*offset].matricula <= 0);
 
-    do
-    {
-        printf("\n3) Carrera: ");
-        fflush(stdin);
-        gets(alumnos[*offset].carrera);
-    } while (strlen(alumnos[*offset].carrera) == 0);
-    
-    do
-    {
-        printf("\n4) Semestre (0-10): ");
-        scanf("%d", &alumnos[*offset].semestre);
-    } while (alumnos[*offset].semestre < 1 || alumnos[*offset].semestre > 10);
+        do
+        {
+            printf("\n2) Nombre: ");
+            fflush(stdin);
+            gets(alumnos[*offset].nombre);
+        } while (strlen(alumnos[*offset].nombre) == 0);
 
-    // TODO: Fecha de nacimiento, validar que sea menor a la actual
+        do
+        {
+            printf("\n3) Carrera: ");
+            fflush(stdin);
+            gets(alumnos[*offset].carrera);
+        } while (strlen(alumnos[*offset].carrera) == 0);
+        
+        do
+        {
+            printf("\n4) Semestre (0-10): ");
+            scanf("%d", &alumnos[*offset].semestre);
+        } while (alumnos[*offset].semestre < 1 || alumnos[*offset].semestre > 10);
 
-    do
-    {
-        printf("\n6) Correo electronico (Debe tener \'@\' y \'.\'): ");
-        fflush(stdin);
-        gets(alumnos[*offset].correo);
-    } while (strchr(alumnos[*offset].correo, '@') == NULL || strchr(alumnos[*offset].correo, '.') == NULL);
+        // TODO: Fecha de nacimiento, validar que sea menor a la actual
 
-    do
-    {
-        printf("\n7) Telefono (10 digitos): ");
-        scanf("%lld", &alumnos[*offset].telefono);
-    } while (alumnos[*offset].telefono < 1000000000LL || alumnos[*offset].telefono > 9999999999LL);
+        do
+        {
+            printf("\n6) Correo electronico (Debe tener \'@\' y \'.\'): ");
+            fflush(stdin);
+            gets(alumnos[*offset].correo);
+        } while (strchr(alumnos[*offset].correo, '@') == NULL || strchr(alumnos[*offset].correo, '.') == NULL);
+
+        do
+        {
+            printf("\n7) Telefono (10 digitos): ");
+            scanf("%lld", &alumnos[*offset].telefono);
+        } while (alumnos[*offset].telefono < 1000000000LL || alumnos[*offset].telefono > 9999999999LL);
+
+        *offset++;
+
+        do
+        {
+            printf("Ingresar otro alumno? (s/n)\n? ");
+            fflush(stdin);
+            scanf("%c", &res);
+        } while (res != 's' && res != 'n');
+    } while (res = 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
 }
