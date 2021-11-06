@@ -1,18 +1,20 @@
 #include <stdio.h> 
+#include <string.h>
 //#include "limpieza.h" 
 //#define fflush(stdin) limpieza()
 
 struct fecha
 {
-    int dd, mmm, aaaa;
+    int dd, mm, aaaa;
 };
 
-struct alumno
+struct datosAlumno
 {
-    long int matricula, telefono;
+    long int matricula;
+    long long int telefono;
     char nombre[40], carrera[40], correo[40];
     int semestre;
-    struct fecha fecha_nac;
+    struct fecha fechaNac;
 };
 
 struct materia
@@ -23,8 +25,8 @@ struct materia
 
 struct profesor
 {
-    long int telefono;
-    int num_empleado, coordinacion;
+    long long int telefono;
+    int numEmpleado, coordinacion;
     char nombre[40], correo[40];
     struct fecha fecha_nac;
 };
@@ -41,15 +43,21 @@ struct inscripcion
     //Fecha actual
 };
 
+int escogerModo(void);
+void ingresarAlumnos(struct datosAlumno *, int *);
+
 int main()
 {
-    int opcion;
-    struct alumno alumnos[100];
+    int opcion, contAlumnos;
+    struct datosAlumno listaAlumnos[100]; // A lo mucho 100 alumnos
 
-    while ((opcion = escogerModo()) != 7) {
-        switch(opcion){
+    contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
+    while ((opcion = escogerModo()) != 7) 
+    {
+        switch(opcion)
+        {
             case 1:
-                // alumnos
+                ingresarAlumnos(listaAlumnos, &contAlumnos);
                 break;
 
             case 2:
@@ -82,7 +90,7 @@ int escogerModo()
 {
     int opcionMenuP;
 
-    printf("\nMenu principal\n"
+    printf("\n\tMenu principal\n"
         "1) Alumnos\n"
         "2) Materias\n"
         "3) Profesores\n"
@@ -93,9 +101,53 @@ int escogerModo()
 
     do
     {
-        printf("Seleccionar una opción\n? ");
+        printf("\nSeleccionar una opción\n? ");
         scanf("%d", &opcionMenuP);
     } while (opcionMenuP < 1 || opcionMenuP > 7);
 
     return opcionMenuP;
+}
+
+void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
+{
+    do
+    {
+        printf("\n1) Matricula (Mayor que cero): ");
+        scanf("%ld", &alumnos[*offset].matricula);
+    } while (alumnos[*offset].matricula <= 0);
+
+    do
+    {
+        printf("\n2) Nombre: ");
+        fflush(stdin);
+        gets(alumnos[*offset].nombre);
+    } while (strlen(alumnos[*offset].nombre) == 0);
+
+    do
+    {
+        printf("\n3) Carrera: ");
+        fflush(stdin);
+        gets(alumnos[*offset].carrera);
+    } while (strlen(alumnos[*offset].carrera) == 0);
+    
+    do
+    {
+        printf("\n4) Semestre (0-10): ");
+        scanf("%d", &alumnos[*offset].semestre);
+    } while (alumnos[*offset].semestre < 1 || alumnos[*offset].semestre > 10);
+
+    // TODO: Fecha de nacimiento, validar que sea menor a la actual
+
+    do
+    {
+        printf("\n6) Correo electronico (Debe tener \'@\' y \'.\'): ");
+        fflush(stdin);
+        gets(alumnos[*offset].correo);
+    } while (strchr(alumnos[*offset].correo, '@') == NULL || strchr(alumnos[*offset].correo, '.') == NULL);
+
+    do
+    {
+        printf("\n7) Telefono (10 digitos): ");
+        scanf("%lld", &alumnos[*offset].telefono);
+    } while (alumnos[*offset].telefono < 1000000000LL || alumnos[*offset].telefono > 9999999999LL);
 }
