@@ -12,7 +12,7 @@ struct alumno
     char nombre[40], carrera[40], correo[40];
     int semestre;
     struct fecha fecha_nac;
-} persona[100];
+} persona[100];  // TODO: deshacerse de la horrenda variable global
 
 struct materia
 {
@@ -40,7 +40,8 @@ struct inscripcion
     //Fecha actual
 };
 
-int menuPrincipal();
+int escogerModo();
+void menuAlumnos();
 void matricula(int);
 void nombre(int);
 void carrera(int);
@@ -55,43 +56,11 @@ int main()
     int opcion, opc2;
  	int i = 0;		
     
-    while ((opcion = menuPrincipal()) != 7) {
-        switch(opcion){
+    while ((opcion = escogerModo()) != 7) {
+        switch(opcion)
+        {
             case 1:
-                // menu alumnos 
-                printf("1.-Matricula\n2.-Nombre\n3.-Carrera\n4.-Semestre\n5.-Fecha de Nacimiento \n6.-Correo\n7.-Telefono\n");
-
-                do
-                {
-                    printf("Seleccione la opcion-> ");
-                    scanf("%d", &opc2);
-                } while (opc2 < 1 || opc2 > 7);
-                
-                switch(opc2)
-                {
-                    case 1:
-                        matricula(i);
-                        break;
-                    case 2: 
-                        nombre(i);
-                        break;
-                    case 3: 
-                        carrera(i);
-                        break;
-                    case 4: 
-                        semestre(i);
-                        break;
-                    case 5: 
-                        fecha_nac(i);
-                        break;
-                    case 6: 
-                        correo(i);
-                        break;
-                    case 7: 
-                        telefono(i);
-                        break;
-                }
-
+                menuAlumnos();
                 break;
 
             case 2:
@@ -213,7 +182,7 @@ int main()
     return 0;
 }
 
-int menuPrincipal()
+int escogerModo()
 {
     int opcionMenuP;
 
@@ -233,6 +202,51 @@ int menuPrincipal()
     } while (opcionMenuP < 1 || opcionMenuP > 7);
 
     return opcionMenuP;
+}
+
+void menuAlumnos()
+{
+    int i;
+    int opcionAlumnos;
+
+    printf("1) Matricula\n"
+        "2) Nombre\n"
+        "3) Carrera\n"
+        "4) Semestre\n"
+        "5) Fecha de Nacimiento\n"
+        "6) Correo\n"
+        "7) Telefono\n");
+
+    do
+    {
+        printf("Seleccione la opcion\n? ");
+        scanf("%d", &opcionAlumnos);
+    } while (opcionAlumnos < 1 || opcionAlumnos > 7);
+    
+    switch(opcionAlumnos)
+    {
+        case 1:
+            matricula(i);
+            break;
+        case 2: 
+            nombre(i);
+            break;
+        case 3: 
+            carrera(i);
+            break;
+        case 4: 
+            semestre(i);
+            break;
+        case 5: 
+            fecha_nac(i);
+            break;
+        case 6: 
+            correo(i);
+            break;
+        case 7: 
+            telefono(i);
+            break;
+    }
 }
 
 // Funciones para los datos de alumnos
