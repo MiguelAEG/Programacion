@@ -46,6 +46,7 @@ struct datosInscripcion
 struct fecha obtenerFechaActual();
 bool validarFecha(struct fecha, struct fecha);
 bool validarInt(int, int, int, char[2]);
+bool validarString(char *, int, int);
 
 int escogerModo(void);
 
@@ -54,7 +55,6 @@ void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *); //TODO: esto tambien llevara los datos de la materia y profesores
 void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
-void validarString();
 int main()
 {
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
@@ -392,13 +392,16 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
     } while (res == 's' && *offset < 100);
 }
 
-void validarString(validar)
+bool validarString(char *validando, int minL, int maxL)
 {
-    if (strlen(validar) == 0)
-        validar = false;
-    else 
-        validar = true;
+    bool valido;
+    if (strlen(validando >= minL && validando <= maxL))
+        valido=true;
+    
+    else
+        valido=false;
 
+    return valido;
 }
 
 void inscripcion(struct datosInscripcion *inscripciones, struct datosGrupo *grupos,
