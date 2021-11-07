@@ -22,12 +22,12 @@ struct materia
     char nombre[40];
 };
 
-struct profesor
+struct datosProfesor
 {
     long long int telefono;
     int numEmpleado, coordinacion;
     char nombre[40], correo[40];
-    struct fecha fecha_nac;
+    struct fecha fechaNac;
 };
 
 struct grupo
@@ -46,13 +46,16 @@ int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
 struct fecha obtenerFechaActual();
 int validarFecha(struct fecha, struct fecha);
+void ingresarProfesores(struct datosProfesor *, int *);
 
 int main()
 {
-    int opcion, contAlumnos;
+    int opcion, contAlumnos, contProfesores;
     struct datosAlumno listaAlumnos[100]; // A lo mucho 100 alumnos
+    struct datosProfesor listaProfesores[100]; // A lo mucho 100 profesores
 
     contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
+    contProfesores = 0; // Lo mismo para los profesores
     while ((opcion = escogerModo()) != 7) 
     {
         switch(opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
@@ -66,7 +69,7 @@ int main()
                 break;
 
             case 3:
-                // profesores
+                ingresarProfesores(listaProfesores, &contProfesores);
                 break;
 
             case 4:
@@ -181,7 +184,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
 
         do
         {
-            printf("\nIngresar otro alumno? (s/n)\n? ");
+            printf("\nAgregar otro alumno? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
@@ -196,7 +199,7 @@ struct fecha obtenerFechaActual() {
     struct fecha fechaConvertida = { // Inicializar una estructura fecha para regresar en la funcion
         .aaaa = fechayhora->tm_year + 1900, // El año de la estructura tm empieza en 1900
         .mm = fechayhora->tm_mon + 1, // El mes de la estructura tm va de 0 a 11
-        .dd = fechayhora->tm_mday
+        .dd = fechayhora->tm_mday // mday es el dia del mes (0-31)
     };
 
     return fechaConvertida;
@@ -220,4 +223,75 @@ int validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
         valido = 0;
 
     return valido;
+}
+
+void ingresarProfesores(struct datosProfesor *profesores, int *offset)
+{
+    char res;
+    do
+    {
+        do
+        {
+            printf("\n1) Numero de empleado (Mayor que cero): ");
+            scanf("%d", &profesores[*offset].numEmpleado);
+        } while (profesores[*offset].numEmpleado <= 0);
+
+        do
+        {
+            printf("\n2) Nombre: ");
+            fflush(stdin);
+            gets(profesores[*offset].nombre);
+        } while (strlen(profesores[*offset].nombre) == 0); // Longitud al menos 1
+
+        do
+        {
+            printf("\n3) Coordinacion (1-6): ");
+            scanf("%d", &profesores[*offset].coordinacion);
+        } while (profesores[*offset].coordinacion <= 0);
+
+        do // Este es para validar que la fecha introducida sea menor que la actual
+        {
+            printf("\n4) Fecha de nacimiento\n");
+
+            do
+            {
+                printf("\ta) A%co: ", 164); // 164 = ñ
+                scanf("%d", &profesores[*offset].fechaNac.aaaa);
+            } while (profesores[*offset].fechaNac.aaaa <= 1900);
+
+            do
+            {
+                printf("\tb) Mes: ");
+                scanf("%d", &profesores[*offset].fechaNac.mm);
+            } while (profesores[*offset].fechaNac.mm < 1 || profesores[*offset].fechaNac.mm > 12);
+            
+            do
+            {
+                printf("\tc) Dia: ");
+                scanf("%d", &profesores[*offset].fechaNac.dd);
+            } while (profesores[*offset].fechaNac.dd < 1 || profesores[*offset].fechaNac.dd > 31);
+        } while (validarFecha(profesores[*offset].fechaNac, obtenerFechaActual()) == 0); // 0 significa que la fecha introducida es mayor o igual a la actual
+        
+        do
+        {
+            printf("\n5) Correo electronico (Debe tener \'@\' y \'.\'): ");
+            fflush(stdin);
+            gets(profesores[*offset].correo);
+        } while (strchr(profesores[*offset].correo, '@') == NULL || strchr(profesores[*offset].correo, '.') == NULL); // strchr regresa NULL si no se encontro el caracter
+
+        do
+        {
+            printf("\n6) Telefono (10 digitos): ");
+            scanf("%lld", &profesores[*offset].telefono);
+        } while (profesores[*offset].telefono < 1000000000LL || profesores[*offset].telefono > 9999999999LL); //LL es de long long int para que sea posible comparar los numeros grandes
+
+        (*offset)++; // Aumenta la cantidad de alumnos
+
+        do
+        {
+            printf("\nAgregar otro profesor? (s/n)\n? ");
+            fflush(stdin);
+            scanf("%c", &res);
+        } while (res != 's' && res != 'n');
+    } while (res == 's' && *offset < 100);
 }
