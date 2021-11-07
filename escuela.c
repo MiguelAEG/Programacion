@@ -139,7 +139,7 @@ bool validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
 
 bool validarInt(int validando, int min, int max, char modo[2])
 {
-    bool valido;
+    bool valido; // Los parentesis () significan intervalo abierto, corchetes [] intervalo cerrado, la combinacion (] o [) denota intervalo semiabierto
 
     if ((strncmp(modo, "()", 2) == 0 && (validando > min && validando < max))
         || (strncmp(modo, "(]", 2) == 0 && (validando > min && validando <= max))
@@ -214,19 +214,19 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             {
                 printf("\ta) A%co: ", 164); // 164 = ñ
                 scanf("%d", &alumnos[*offset].fechaNac.aaaa);
-            } while (alumnos[*offset].fechaNac.aaaa <= 1900);
+            } while (!validarInt(alumnos[*offset].fechaNac.aaaa, 1900, __INT_MAX__, "[]"));
 
             do
             {
                 printf("\tb) Mes: ");
                 scanf("%d", &alumnos[*offset].fechaNac.mm);
-            } while (alumnos[*offset].fechaNac.mm < 1 || alumnos[*offset].fechaNac.mm > 12);
+            } while (!validarInt(alumnos[*offset].fechaNac.mm, 1, 12, "[]"));
             
             do
             {
                 printf("\tc) Dia: ");
                 scanf("%d", &alumnos[*offset].fechaNac.dd);
-            } while (alumnos[*offset].fechaNac.dd < 1 || alumnos[*offset].fechaNac.dd > 31);
+            } while (!validarInt(alumnos[*offset].fechaNac.mm, 1, 31, "[]"));
         } while (!validarFecha(alumnos[*offset].fechaNac, obtenerFechaActual())); // 0 significa que la fecha introducida es mayor o igual a la actual
         
         do
