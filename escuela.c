@@ -47,6 +47,11 @@ bool validarFecha(struct fecha, struct fecha);
 bool validarInt(int, int, int, char[2]);
 bool validarString(char *, int, int);
 
+bool buscarMateria(struct datosMateria *, int, int *);
+bool buscarProfesor(struct datosProfesor *, int, int *);
+bool buscarGrupo(struct datosGrupo *, int, int *);
+bool buscarAlumno(struct datosAlumno *, int, int *);
+
 struct fecha obtenerFechaActual();
 int escogerModo(void);
 
@@ -143,6 +148,73 @@ bool validarInt(int validando, int min, int max, char modo[2])
     return valido;
 }
 
+bool buscarMateria(struct datosMateria *materias, int busqueda, int *max)
+{
+    int i;
+    bool encontrado = false;
+
+    for (i = 0; i < max; i++)
+    {
+        if (materias[i].clave == busqueda)
+        {
+            printf("Materia encontrada en la base de datos\n");
+            encontrado = true;
+        }
+    }
+    
+    return encontrado;
+}
+
+bool buscarProfesor(struct datosProfesor *profesores, int busqueda, int *max)
+{
+    int i;
+    bool encontrado = false;
+
+    for (i = 0; i < max; i++)
+    {
+        if (profesores[i].numEmpleado == busqueda)
+        {
+            printf("Profesor encontrado en la base de datos\n");
+            encontrado = true;
+        }
+    }
+    
+    return encontrado;
+}
+
+bool buscarGrupo(struct datosGrupo *grupos, int busqueda, int *max)
+{
+    int i;
+    bool encontrado = false;
+
+    for (i = 0; i < max; i++)
+    {
+        if (grupos[i].numGrupo == busqueda)
+        {
+            printf("Grupo encontrado en la base de datos\n");
+            encontrado = true;
+        }
+    }
+    
+    return encontrado;
+}
+
+bool buscarAlumno(struct datosAlumno *alumnos, int busqueda, int *max)
+{
+    int i;
+    bool encontrado = false;
+
+    for (i = 0; i < max; i++)
+    {
+        if (alumnos[i].matricula == busqueda)
+        {
+            printf("Alumno encontrado en la base de datos\n");
+            encontrado = true;
+        }
+    }
+    
+    return encontrado;
+}
 struct fecha obtenerFechaActual() {
     time_t t = time(NULL); // Inicializar la variable que se usara para la estructura
     struct tm *fechayhora; // Estructura tm definida en time.h
