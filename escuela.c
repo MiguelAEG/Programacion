@@ -42,9 +42,10 @@ struct inscripcion
     struct fecha fechaActual;
 };
 
-struct fecha obtenerFechaActual();
 int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
+struct fecha obtenerFechaActual();
+int validarFecha(struct fecha, struct fecha);
 
 int main()
 {
@@ -101,7 +102,7 @@ int escogerModo()
 
     do
     {
-        printf("\nSeleccionar una opción\n? ");
+        printf("\nSeleccionar una opcion\n? ");
         scanf("%d", &opcionMenuP);
     } while (opcionMenuP < 1 || opcionMenuP > 7);
 
@@ -140,8 +141,28 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             scanf("%d", &alumnos[*offset].semestre);
         } while (alumnos[*offset].semestre < 1 || alumnos[*offset].semestre > 10);
 
-        // TODO: Fecha de nacimiento, validar que sea menor a la actual
+        do // Este es para validar que la fecha introducida sea menor que la actual
+        {
+            printf("\n5) Fecha de nacimiento\n");
 
+            do
+            {
+                printf("\ta) A%co: ", 164); // 164 = ñ
+                scanf("%d", &alumnos[*offset].fechaNac.aaaa);
+            } while (alumnos[*offset].fechaNac.aaaa <= 1900);
+
+            do
+            {
+                printf("\tb) Mes: ");
+                scanf("%d", &alumnos[*offset].fechaNac.mm);
+            } while (alumnos[*offset].fechaNac.mm < 1 || alumnos[*offset].fechaNac.mm > 12);
+            
+            do
+            {
+                printf("\tc) Dia: ");
+                scanf("%d", &alumnos[*offset].fechaNac.dd);
+            } while (alumnos[*offset].fechaNac.dd < 1 || alumnos[*offset].fechaNac.dd > 31);
+        } while (validarFecha(alumnos[*offset].fechaNac, obtenerFechaActual()) == 0); // 0 significa que la fecha introducida es mayor o igual a la actual
         do
         {
             printf("\n6) Correo electronico (Debe tener \'@\' y \'.\'): ");
@@ -159,7 +180,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
 
         do
         {
-            printf("Ingresar otro alumno? (s/n)\n? ");
+            printf("\nIngresar otro alumno? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
@@ -178,4 +199,24 @@ struct fecha obtenerFechaActual() {
     };
 
     return fechaConvertida;
+}
+
+int validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
+{
+    int valido;
+
+    if (fechaIntroducida.aaaa < fechaActual.aaaa) // Si el año es menor es valido
+        valido = 1;
+    else if (fechaIntroducida.aaaa > fechaActual.aaaa) // Si el año es mayor no es valido
+        valido = 0;
+    else if (fechaIntroducida.mm < fechaActual.mm) // El otro caso es que el año sea igual, si el mes es menor, es valido
+        valido = 1;
+    else if (fechaIntroducida.mm > fechaActual.mm) // Si el mes es mayor, no es valido
+        valido = 0;
+    else if (fechaIntroducida.dd < fechaActual.dd) // El otro caso es que el mes sea igual, si el dia es menor es valido
+        valido = 1;
+    else // El otro caso es que el dia sea igual o mayor, no es valido
+        valido = 0;
+
+    return valido;
 }
