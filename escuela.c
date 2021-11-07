@@ -177,6 +177,4 @@ void tiempo() {
     tm=localtime(&t);
     strftime(fechayhora, 100, "%d/%m/%Y", tm);
     printf("Hoy es: %s\n", fechayhora);
-
-    return;
 }
