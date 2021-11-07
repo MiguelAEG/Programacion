@@ -1,6 +1,7 @@
 #include <stdio.h> 
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 
 struct fecha
 {
@@ -43,7 +44,7 @@ struct datosInscripcion
 };
 
 struct fecha obtenerFechaActual();
-int validarFecha(struct fecha, struct fecha);
+bool validarFecha(struct fecha, struct fecha);
 int escogerModo(void);
 
 void ingresarAlumnos(struct datosAlumno *, int *);
@@ -114,22 +115,22 @@ struct fecha obtenerFechaActual() {
     return fechaConvertida;
 }
 
-int validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
+bool validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
 {
-    int valido;
+    bool valido;
 
     if (fechaIntroducida.aaaa < fechaActual.aaaa) // Si el año es menor es valido
-        valido = 1;
+        valido = true;
     else if (fechaIntroducida.aaaa > fechaActual.aaaa) // Si el año es mayor no es valido
-        valido = 0;
+        valido = false;
     else if (fechaIntroducida.mm < fechaActual.mm) // El otro caso es que el año sea igual, si el mes es menor, es valido
-        valido = 1;
+        valido = true;
     else if (fechaIntroducida.mm > fechaActual.mm) // Si el mes es mayor, no es valido
-        valido = 0;
+        valido = false;
     else if (fechaIntroducida.dd < fechaActual.dd) // El otro caso es que el mes sea igual, si el dia es menor es valido
-        valido = 1;
+        valido = true;
     else // El otro caso es que el dia sea igual o mayor, no es valido
-        valido = 0;
+        valido = false;
 
     return valido;
 }
@@ -209,7 +210,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
                 printf("\tc) Dia: ");
                 scanf("%d", &alumnos[*offset].fechaNac.dd);
             } while (alumnos[*offset].fechaNac.dd < 1 || alumnos[*offset].fechaNac.dd > 31);
-        } while (validarFecha(alumnos[*offset].fechaNac, obtenerFechaActual()) == 0); // 0 significa que la fecha introducida es mayor o igual a la actual
+        } while (!validarFecha(alumnos[*offset].fechaNac, obtenerFechaActual())); // 0 significa que la fecha introducida es mayor o igual a la actual
         
         do
         {
@@ -316,7 +317,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
                 printf("\tc) Dia: ");
                 scanf("%d", &profesores[*offset].fechaNac.dd);
             } while (profesores[*offset].fechaNac.dd < 1 || profesores[*offset].fechaNac.dd > 31);
-        } while (validarFecha(profesores[*offset].fechaNac, obtenerFechaActual()) == 0); // 0 significa que la fecha introducida es mayor o igual a la actual
+        } while (!validarFecha(profesores[*offset].fechaNac, obtenerFechaActual())); // 0 significa que la fecha introducida es mayor o igual a la actual
         
         do
         {
