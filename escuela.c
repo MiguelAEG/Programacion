@@ -238,19 +238,22 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
 void ingresarMaterias(struct datosMateria *materias, int *offset){
 
     char res;
-    do {
-        do {
+    do
+    {
+        do
+        {
             printf("\n1)Nombre: ");
             fflush(stdin);
-            gets(materias[*offset]. nombre);
-        }while (strlen(materias[*offset].nombre)==0);
+            gets(materias[*offset].nombre);
+        } while (strlen(materias[*offset].nombre) == 0);
 
-        do {       
+        do
+        {       
             printf("\n2)Semestre: ");
             scanf("%d", &materias[*offset].semestre);
-        }while (materias[*offset].semestre<1 || materias[*offset].semestre>10);
+        } while (materias[*offset].semestre < 1 || materias[*offset].semestre > 10);
 
-    }while (res=='s' &&*offset<100);
+    } while (res == 's' && *offset < 100);
 
 }
 
