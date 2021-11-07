@@ -182,7 +182,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
     {
         do
         {
-            printf("\n1) Matricula (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
+            printf("\n1) Matricula (Mayor que cero): ");
             scanf("%ld", &alumnos[*offset].matricula);
         } while (!validarInt(alumnos[*offset].matricula, 0,  __INT_MAX__, "(]")); // (0, maximo]
 
@@ -214,7 +214,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             {
                 printf("\ta) A%co: ", 164); // 164 = ñ
                 scanf("%d", &alumnos[*offset].fechaNac.aaaa);
-            } while (!validarInt(alumnos[*offset].fechaNac.aaaa, 1900, __INT_MAX__, "[]"));
+            } while (!validarInt(alumnos[*offset].fechaNac.aaaa, 1900, __INT_MAX__, "(]"));
 
             do
             {
@@ -260,9 +260,9 @@ void ingresarMaterias(struct datosMateria *materias, int *offset){
     {
         do
         {
-            printf("\n1) Clave (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
+            printf("\n1) Clave (Mayor que cero): ");
             scanf("%d", &materias[*offset].clave);
-        } while (materias[*offset].clave <= 0);
+        } while (!validarInt(materias[*offset].clave, 0, __INT_MAX__, "(]"));
 
         do
         {
@@ -275,7 +275,7 @@ void ingresarMaterias(struct datosMateria *materias, int *offset){
         {       
             printf("\n3) Semestre: ");
             scanf("%d", &materias[*offset].semestre);
-        } while (materias[*offset].semestre < 1 || materias[*offset].semestre > 10);
+        } while (!validarInt(materias[*offset].semestre, 0, 10, "[]"));
 
         (*offset)++;
 
@@ -296,9 +296,9 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
     {
         do
         {
-            printf("\n1) Numero de empleado (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
+            printf("\n1) Numero de empleado (Mayor que cero): "); 
             scanf("%d", &profesores[*offset].numEmpleado);
-        } while (profesores[*offset].numEmpleado <= 0);
+        } while (!validarInt(profesores[*offset].numEmpleado, 0, __INT_MAX__, "(]"));
 
         do
         {
@@ -311,7 +311,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
         {
             printf("\n3) Coordinacion (1-6): ");
             scanf("%d", &profesores[*offset].coordinacion);
-        } while (profesores[*offset].coordinacion < 1 || profesores[*offset].coordinacion > 6);
+        } while (!validarInt(profesores[*offset].coordinacion, 0, 6, "[]"));
 
         do // Este es para validar que la fecha introducida sea menor que la actual
         {
@@ -321,19 +321,19 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
             {
                 printf("\ta) A%co: ", 164); // 164 = ñ
                 scanf("%d", &profesores[*offset].fechaNac.aaaa);
-            } while (profesores[*offset].fechaNac.aaaa <= 1900);
+            } while (!validarInt(profesores[*offset].fechaNac.aaaa, 1900, __INT_MAX__, "(]"));
 
             do
             {
                 printf("\tb) Mes: ");
                 scanf("%d", &profesores[*offset].fechaNac.mm);
-            } while (profesores[*offset].fechaNac.mm < 1 || profesores[*offset].fechaNac.mm > 12);
+            } while (!validarInt(profesores[*offset].fechaNac.mm, 1, 12, "[]"));
             
             do
             {
                 printf("\tc) Dia: ");
                 scanf("%d", &profesores[*offset].fechaNac.dd);
-            } while (profesores[*offset].fechaNac.dd < 1 || profesores[*offset].fechaNac.dd > 31);
+            } while (!validarInt(profesores[*offset].fechaNac.mm, 1, 31, "[]"));
         } while (!validarFecha(profesores[*offset].fechaNac, obtenerFechaActual())); // 0 significa que la fecha introducida es mayor o igual a la actual
         
         do
@@ -367,15 +367,15 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
     {
         do
         {
-            printf("\n1) Numero de grupo (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
+            printf("\n1) Numero de grupo (Mayor que cero): "); 
             scanf("%d", &grupos[*offset].numGrupo);
-        } while (grupos[*offset].numGrupo <= 0);
+        } while (!validarInt(grupos[*offset].numGrupo, 0, __INT_MAX__, "(]"));
 
         do
         {
             printf("\n2) Semestre (1-10): ");
             scanf("%d", &grupos[*offset].semestre);
-        } while (grupos[*offset].semestre < 1 || grupos[*offset].semestre > 10);
+        } while (!validarInt(grupos[*offset].numGrupo, 1, 10, "[]"));
 
         // TODO: 3) Materias
 
