@@ -60,11 +60,7 @@ void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *); //TODO: esto tambien llevara los datos de la materia y profesores
 void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
-<<<<<<< HEAD
-=======
-void validarString();
 
->>>>>>> 7de96a4023ecc583051b800698e667f6e148efb7
 int main()
 {
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
@@ -142,6 +138,19 @@ bool validarInt(int validando, int min, int max, char modo[2])
         || (strncmp(modo, "[)", 2) == 0 && (validando >= min && validando < max))
         || (strncmp(modo, "[]", 2) == 0 && (validando >= min && validando <= max)))
         valido = true;
+    else
+        valido = false;
+
+    return valido;
+}
+
+bool validarString(char *validando, int minL, int maxL)
+{
+    bool valido;
+
+    if (validarInt(strlen(validando), minL, maxL, "[]"))
+        valido = true;
+    
     else
         valido = false;
 
@@ -467,18 +476,6 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
     } while (res == 's' && *offset < 100);
-}
-
-bool validarString(char *validando, int minL, int maxL)
-{
-    bool valido;
-    if (strlen(validando >= minL && validando <= maxL))
-        valido=true;
-    
-    else
-        valido=false;
-
-    return valido;
 }
 
 void inscripcion(struct datosInscripcion *inscripciones, struct datosGrupo *grupos,
