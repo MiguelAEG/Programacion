@@ -43,7 +43,8 @@ struct inscripcion
     int grupo, matricula;
     struct fecha fechaActual;
 };
-void tiempo();
+
+struct fecha obtenerFechaActual();
 int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
 
@@ -167,10 +168,16 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
     } while (res == 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
 }
 
-void tiempo() {
-
+struct fecha obtenerFechaActual() {
     time_t t = time(NULL); // Inicializar la variable que se usara para 
     struct tm *fechayhora; // Estructura definida en time.h
+    fechayhora = localtime(&t);
 
-    fechayhora = localtime(&t); 
+    struct fecha fechaConvertida = { // Inicializar una estructura para regresar en la funcion
+        .aaaa = fechayhora->tm_year,
+        .mm = fechayhora->tm_mon + 1, // El mes de la estructura tm va de 0 a 11
+        .dd = fechayhora->tm_mday + 1900 // El año de la estructura tm empieza en 1900
+    };
+
+    return fechaConvertida;
 }
