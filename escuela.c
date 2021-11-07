@@ -167,14 +167,14 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
 }
 
 struct fecha obtenerFechaActual() {
-    time_t t = time(NULL); // Inicializar la variable que se usara para 
-    struct tm *fechayhora; // Estructura definida en time.h
-    fechayhora = localtime(&t);
+    time_t t = time(NULL); // Inicializar la variable que se usara para la estructura
+    struct tm *fechayhora; // Estructura tm definida en time.h
+    fechayhora = localtime(&t); // Inicializa la estructura tm para obtener el tiempo actial
 
-    struct fecha fechaConvertida = { // Inicializar una estructura para regresar en la funcion
-        .aaaa = fechayhora->tm_year,
+    struct fecha fechaConvertida = { // Inicializar una estructura fecha para regresar en la funcion
+        .aaaa = fechayhora->tm_year + 1900, // El año de la estructura tm empieza en 1900
         .mm = fechayhora->tm_mon + 1, // El mes de la estructura tm va de 0 a 11
-        .dd = fechayhora->tm_mday + 1900 // El año de la estructura tm empieza en 1900
+        .dd = fechayhora->tm_mday
     };
 
     return fechaConvertida;
