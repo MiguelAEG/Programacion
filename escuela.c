@@ -163,6 +163,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
                 scanf("%d", &alumnos[*offset].fechaNac.dd);
             } while (alumnos[*offset].fechaNac.dd < 1 || alumnos[*offset].fechaNac.dd > 31);
         } while (validarFecha(alumnos[*offset].fechaNac, obtenerFechaActual()) == 0); // 0 significa que la fecha introducida es mayor o igual a la actual
+        
         do
         {
             printf("\n6) Correo electronico (Debe tener \'@\' y \'.\'): ");
