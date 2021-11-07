@@ -43,10 +43,10 @@ struct datosInscripcion
     struct fecha fechaCreacion;
 };
 
-struct fecha obtenerFechaActual();
 bool validarFecha(struct fecha, struct fecha);
 bool validarInt(int, int, int, char[2]);
 
+struct fecha obtenerFechaActual();
 int escogerModo(void);
 
 void ingresarAlumnos(struct datosAlumno *, int *);
@@ -103,20 +103,6 @@ int main()
     return 0;
 }
 
-struct fecha obtenerFechaActual() {
-    time_t t = time(NULL); // Inicializar la variable que se usara para la estructura
-    struct tm *fechayhora; // Estructura tm definida en time.h
-    fechayhora = localtime(&t); // Inicializa la estructura tm para obtener el tiempo actial
-
-    struct fecha fechaConvertida = { // Inicializar una estructura fecha para regresar en la funcion
-        .aaaa = fechayhora->tm_year + 1900, // El año de la estructura tm empieza en 1900
-        .mm = fechayhora->tm_mon + 1, // El mes de la estructura tm va de 0 a 11
-        .dd = fechayhora->tm_mday // mday es el dia del mes (0-31)
-    };
-
-    return fechaConvertida;
-}
-
 bool validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
 {
     bool valido;
@@ -150,6 +136,20 @@ bool validarInt(int validando, int min, int max, char modo[2])
         valido = false;
 
     return valido;
+}
+
+struct fecha obtenerFechaActual() {
+    time_t t = time(NULL); // Inicializar la variable que se usara para la estructura
+    struct tm *fechayhora; // Estructura tm definida en time.h
+    fechayhora = localtime(&t); // Inicializa la estructura tm para obtener el tiempo actial
+
+    struct fecha fechaConvertida = { // Inicializar una estructura fecha para regresar en la funcion
+        .aaaa = fechayhora->tm_year + 1900, // El año de la estructura tm empieza en 1900
+        .mm = fechayhora->tm_mon + 1, // El mes de la estructura tm va de 0 a 11
+        .dd = fechayhora->tm_mday // mday es el dia del mes (0-31)
+    };
+
+    return fechaConvertida;
 }
 
 int escogerModo()
