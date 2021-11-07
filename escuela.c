@@ -52,6 +52,8 @@ int main()
     int opcion, contAlumnos;
     struct datosAlumno listaAlumnos[100]; // A lo mucho 100 alumnos
 
+    tiempo();
+
     contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
     while ((opcion = escogerModo()) != 7) 
     {
@@ -169,12 +171,8 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
 
 void tiempo() {
 
-    time_t t;
-    struct tm *tm;
-    char fechayhora[100];
+    time_t t = time(NULL); // Inicializar la variable que se usara para 
+    struct tm *tm; // Estructura definida en time.h
 
-    t=time(NULL);
-    tm=localtime(&t);
-    strftime(fechayhora, 100, "%d/%m/%Y", tm);
-    printf("Hoy es: %s\n", fechayhora);
+    tm = localtime(&t);
 }
