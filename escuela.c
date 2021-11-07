@@ -156,7 +156,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             scanf("%lld", &alumnos[*offset].telefono);
         } while (alumnos[*offset].telefono < 1000000000LL || alumnos[*offset].telefono > 9999999999LL); //LL es de long long int para que sea posible comparar los numeros grandes
 
-        *offset++; // Aumenta la cantidad de alumnos
+        (*offset)++; // Aumenta la cantidad de alumnos
 
         do
         {
@@ -164,7 +164,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             fflush(stdin);
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
-    } while (res = 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
+    } while (res == 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
 }
 
 void tiempo() {
