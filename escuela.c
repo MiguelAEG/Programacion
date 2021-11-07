@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include <string.h>
+#include <time.h>
 //#include "limpieza.h" 
 //#define fflush(stdin) limpieza()
 
@@ -42,7 +43,7 @@ struct inscripcion
     int grupo, matricula;
     struct fecha fechaActual;
 };
-
+void tiempo();
 int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
 
@@ -164,4 +165,18 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
     } while (res = 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
+}
+
+void tiempo() {
+
+    time_t t;
+    struct tm *tm;
+    char fechayhora[100];
+
+    t=time(NULL);
+    tm=localtime(&t);
+    strftime(fechayhora, 100, "%d/%m/%Y", tm);
+    printf("Hoy es: %s\n", fechayhora);
+
+    return;
 }
