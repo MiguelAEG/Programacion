@@ -55,6 +55,7 @@ void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *); //TODO: esto tambien llevara los datos de la materia y profesores
 void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
 void validarString();
+
 int main()
 {
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
