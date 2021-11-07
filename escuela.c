@@ -44,12 +44,16 @@ struct inscripcion
 void tiempo();
 int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
-
+void ingresarMaterias(struct materia *, int *);
 int main()
 {
-    int opcion, contAlumnos;
+    int opcion, contAlumnos, contMaterias;
     struct datosAlumno listaAlumnos[100]; // A lo mucho 100 alumnos
+    struct materia listaMaterias[100];
 
+
+
+    contMaterias=0;
     contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
     while ((opcion = escogerModo()) != 7) 
     {
@@ -60,7 +64,7 @@ int main()
                 break;
 
             case 2:
-                // materias
+                ingresarMaterias(listaMaterias, &contMaterias);
                 break;
 
             case 3:
@@ -163,6 +167,28 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
     } while (res == 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
+}
+
+void ingresarMaterias(struct materia *materias, int *offset){
+
+    char res;
+    do {
+        do {
+            printf("Ingrese su nombre: \n");
+            fflush(stdin);
+            gets(materias[*offset]. nombre);
+        }while (strlen(materias[*offset].nombre)==0);
+
+        do {
+        
+            printf("Ingrese su semestre: \n");
+            scanf("%d", &materias[*offset].semestre);
+        }while (materias[*offset].semestre<1 || materias[*offset].semestre>10);
+
+
+
+    }while (res=='s' &&*offset<100);
+
 }
 
 void tiempo() {
