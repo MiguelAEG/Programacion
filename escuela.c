@@ -170,7 +170,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
 void tiempo() {
 
     time_t t = time(NULL); // Inicializar la variable que se usara para 
-    struct tm *fecha; // Estructura definida en time.h
+    struct tm *fechayhora; // Estructura definida en time.h
 
     fechayhora = localtime(&t); 
 }
