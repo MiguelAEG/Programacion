@@ -30,10 +30,10 @@ struct datosProfesor
     struct fecha fechaNac;
 };
 
-struct grupo
+struct datosGrupo
 {
-    int numero, semestre, materias[7], profesores[7];
-    struct fecha fechaActual;
+    int numGrupo, semestre, materias[7], profesores[7];
+    struct fecha fechaCreacion;
 };
 
 struct inscripcion
@@ -42,20 +42,23 @@ struct inscripcion
     struct fecha fechaActual;
 };
 
-int escogerModo(void);
-void ingresarAlumnos(struct datosAlumno *, int *);
 struct fecha obtenerFechaActual();
 int validarFecha(struct fecha, struct fecha);
+int escogerModo(void);
+void ingresarAlumnos(struct datosAlumno *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
+void ingresarGrupos(struct datosGrupo *, int *);
 
 int main()
 {
-    int opcion, contAlumnos, contProfesores;
+    int opcion, contAlumnos, contProfesores, contGrupos;
     struct datosAlumno listaAlumnos[100]; // A lo mucho 100 alumnos
     struct datosProfesor listaProfesores[100]; // A lo mucho 100 profesores
+    struct datosGrupo listaGrupos[100]; // A lo mucho 100 grupos
 
     contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
     contProfesores = 0; // Lo mismo para los profesores
+    contGrupos = 0; // Y para los grupos
     while ((opcion = escogerModo()) != 7) 
     {
         switch(opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
@@ -73,7 +76,7 @@ int main()
                 break;
 
             case 4:
-                // grupos
+                ingresarGrupos(listaGrupos, &contGrupos);
                 break;
 
             case 5:
@@ -88,6 +91,40 @@ int main()
     }
 
     return 0;
+}
+
+struct fecha obtenerFechaActual() {
+    time_t t = time(NULL); // Inicializar la variable que se usara para la estructura
+    struct tm *fechayhora; // Estructura tm definida en time.h
+    fechayhora = localtime(&t); // Inicializa la estructura tm para obtener el tiempo actial
+
+    struct fecha fechaConvertida = { // Inicializar una estructura fecha para regresar en la funcion
+        .aaaa = fechayhora->tm_year + 1900, // El año de la estructura tm empieza en 1900
+        .mm = fechayhora->tm_mon + 1, // El mes de la estructura tm va de 0 a 11
+        .dd = fechayhora->tm_mday // mday es el dia del mes (0-31)
+    };
+
+    return fechaConvertida;
+}
+
+int validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
+{
+    int valido;
+
+    if (fechaIntroducida.aaaa < fechaActual.aaaa) // Si el año es menor es valido
+        valido = 1;
+    else if (fechaIntroducida.aaaa > fechaActual.aaaa) // Si el año es mayor no es valido
+        valido = 0;
+    else if (fechaIntroducida.mm < fechaActual.mm) // El otro caso es que el año sea igual, si el mes es menor, es valido
+        valido = 1;
+    else if (fechaIntroducida.mm > fechaActual.mm) // Si el mes es mayor, no es valido
+        valido = 0;
+    else if (fechaIntroducida.dd < fechaActual.dd) // El otro caso es que el mes sea igual, si el dia es menor es valido
+        valido = 1;
+    else // El otro caso es que el dia sea igual o mayor, no es valido
+        valido = 0;
+
+    return valido;
 }
 
 int escogerModo()
@@ -191,40 +228,6 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
     } while (res == 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
 }
 
-struct fecha obtenerFechaActual() {
-    time_t t = time(NULL); // Inicializar la variable que se usara para la estructura
-    struct tm *fechayhora; // Estructura tm definida en time.h
-    fechayhora = localtime(&t); // Inicializa la estructura tm para obtener el tiempo actial
-
-    struct fecha fechaConvertida = { // Inicializar una estructura fecha para regresar en la funcion
-        .aaaa = fechayhora->tm_year + 1900, // El año de la estructura tm empieza en 1900
-        .mm = fechayhora->tm_mon + 1, // El mes de la estructura tm va de 0 a 11
-        .dd = fechayhora->tm_mday // mday es el dia del mes (0-31)
-    };
-
-    return fechaConvertida;
-}
-
-int validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
-{
-    int valido;
-
-    if (fechaIntroducida.aaaa < fechaActual.aaaa) // Si el año es menor es valido
-        valido = 1;
-    else if (fechaIntroducida.aaaa > fechaActual.aaaa) // Si el año es mayor no es valido
-        valido = 0;
-    else if (fechaIntroducida.mm < fechaActual.mm) // El otro caso es que el año sea igual, si el mes es menor, es valido
-        valido = 1;
-    else if (fechaIntroducida.mm > fechaActual.mm) // Si el mes es mayor, no es valido
-        valido = 0;
-    else if (fechaIntroducida.dd < fechaActual.dd) // El otro caso es que el mes sea igual, si el dia es menor es valido
-        valido = 1;
-    else // El otro caso es que el dia sea igual o mayor, no es valido
-        valido = 0;
-
-    return valido;
-}
-
 void ingresarProfesores(struct datosProfesor *profesores, int *offset)
 {
     char res;
@@ -247,7 +250,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
         {
             printf("\n3) Coordinacion (1-6): ");
             scanf("%d", &profesores[*offset].coordinacion);
-        } while (profesores[*offset].coordinacion <= 0);
+        } while (profesores[*offset].coordinacion < 1 || profesores[*offset].coordinacion > 6);
 
         do // Este es para validar que la fecha introducida sea menor que la actual
         {
@@ -290,6 +293,38 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
         do
         {
             printf("\nAgregar otro profesor? (s/n)\n? ");
+            fflush(stdin);
+            scanf("%c", &res);
+        } while (res != 's' && res != 'n');
+    } while (res == 's' && *offset < 100);
+}
+
+void ingresarGrupos(struct datosGrupo *grupos, int *offset)
+{
+    char res;
+    do
+    {
+        do
+        {
+            printf("\n1) Numero de grupo (Mayor que cero): ");
+            scanf("%d", &grupos[*offset].numGrupo);
+        } while (grupos[*offset].numGrupo <= 0);
+
+        do
+        {
+            printf("\n2) Semestre (1-10): ");
+            scanf("%d", &grupos[*offset].semestre);
+        } while (grupos[*offset].semestre < 1 || grupos[*offset].semestre > 10);
+
+        // 3) Materias
+
+        // 4) Profesores, necesito primero las materias para esto
+
+        grupos[*offset].fechaCreacion = obtenerFechaActual();
+
+        do
+        {
+            printf("\nAgregar otro grupo? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
