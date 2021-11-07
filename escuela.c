@@ -242,17 +242,31 @@ void ingresarMaterias(struct datosMateria *materias, int *offset){
     {
         do
         {
-            printf("\n1)Nombre: ");
+            printf("\n1) Clave (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
+            scanf("%d", &materias[*offset].clave);
+        } while (materias[*offset].clave <= 0);
+
+        do
+        {
+            printf("\n2) Nombre: ");
             fflush(stdin);
             gets(materias[*offset].nombre);
         } while (strlen(materias[*offset].nombre) == 0);
 
         do
         {       
-            printf("\n2)Semestre: ");
+            printf("\n3) Semestre: ");
             scanf("%d", &materias[*offset].semestre);
         } while (materias[*offset].semestre < 1 || materias[*offset].semestre > 10);
 
+        (*offset)++;
+
+        do
+        {
+            printf("\nAgregar otro alumno? (s/n)\n? ");
+            fflush(stdin);
+            scanf("%c", &res);
+        } while (res != 's' && res != 'n');
     } while (res == 's' && *offset < 100);
 
 }
