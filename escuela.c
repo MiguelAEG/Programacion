@@ -54,7 +54,7 @@ void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *); //TODO: esto tambien llevara los datos de la materia y profesores
 void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
-
+void validarString();
 int main()
 {
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
@@ -390,6 +390,15 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
     } while (res == 's' && *offset < 100);
+}
+
+void validarString(validar)
+{
+    if (strlen(validar) == 0)
+        validar = false;
+    else 
+        validar = true;
+
 }
 
 void inscripcion(struct datosInscripcion *inscripciones, struct datosGrupo *grupos,
