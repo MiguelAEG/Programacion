@@ -36,10 +36,10 @@ struct datosGrupo
     struct fecha fechaCreacion;
 };
 
-struct inscripcion
+struct datosInscripcion
 {
-    int grupo, matricula;
-    struct fecha fechaActual;
+    int numGrupo, matricula;
+    struct fecha fechaCreacion;
 };
 
 struct fecha obtenerFechaActual();
@@ -47,18 +47,21 @@ int validarFecha(struct fecha, struct fecha);
 int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
-void ingresarGrupos(struct datosGrupo *, int *);
+void ingresarGrupos(struct datosGrupo *, int *); //TODO: esto tambien llevara los datos de la materia y profesores
+void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
 
 int main()
 {
-    int opcion, contAlumnos, contProfesores, contGrupos;
+    int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones;
     struct datosAlumno listaAlumnos[100]; // A lo mucho 100 alumnos
     struct datosProfesor listaProfesores[100]; // A lo mucho 100 profesores
     struct datosGrupo listaGrupos[100]; // A lo mucho 100 grupos
+    struct datosInscripcion listaInscripciones[100]; // A lo mucho 100 inscripciones
 
     contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
     contProfesores = 0; // Lo mismo para los profesores
     contGrupos = 0; // Y para los grupos
+    contInscripciones = 0; // Y las inscripciones
     while ((opcion = escogerModo()) != 7) 
     {
         switch(opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
@@ -80,7 +83,7 @@ int main()
                 break;
 
             case 5:
-                // inscripcion
+                inscripcion(listaInscripciones, listaGrupos, listaAlumnos, &contInscripciones);
                 break;
 
             case 6:
@@ -157,7 +160,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
     {
         do
         {
-            printf("\n1) Matricula (Mayor que cero): ");
+            printf("\n1) Matricula (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
             scanf("%ld", &alumnos[*offset].matricula);
         } while (alumnos[*offset].matricula <= 0);
 
@@ -235,7 +238,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
     {
         do
         {
-            printf("\n1) Numero de empleado (Mayor que cero): ");
+            printf("\n1) Numero de empleado (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
             scanf("%d", &profesores[*offset].numEmpleado);
         } while (profesores[*offset].numEmpleado <= 0);
 
@@ -306,7 +309,7 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
     {
         do
         {
-            printf("\n1) Numero de grupo (Mayor que cero): ");
+            printf("\n1) Numero de grupo (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
             scanf("%d", &grupos[*offset].numGrupo);
         } while (grupos[*offset].numGrupo <= 0);
 
@@ -316,9 +319,9 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
             scanf("%d", &grupos[*offset].semestre);
         } while (grupos[*offset].semestre < 1 || grupos[*offset].semestre > 10);
 
-        // 3) Materias
+        // TODO: 3) Materias
 
-        // 4) Profesores, necesito primero las materias para esto
+        // TODO: 4) Profesores, necesito primero las materias para esto
 
         grupos[*offset].fechaCreacion = obtenerFechaActual();
 
@@ -329,4 +332,10 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
     } while (res == 's' && *offset < 100);
+}
+
+void inscripcion(struct datosInscripcion *inscripciones, struct datosGrupo *grupos,
+    struct datosAlumno *alumnos, int *offset)
+{
+    
 }
