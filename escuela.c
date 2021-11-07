@@ -163,5 +163,5 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             fflush(stdin);
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
-    } while (res = 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
+    } while (res == 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
 }
