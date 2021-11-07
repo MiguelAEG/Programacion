@@ -45,6 +45,8 @@ struct datosInscripcion
 
 struct fecha obtenerFechaActual();
 bool validarFecha(struct fecha, struct fecha);
+bool validarInt(int, int, int, char[2]);
+
 int escogerModo(void);
 
 void ingresarAlumnos(struct datosAlumno *, int *);
@@ -135,6 +137,21 @@ bool validarFecha(struct fecha fechaIntroducida, struct fecha fechaActual)
     return valido;
 }
 
+bool validarInt(int validando, int min, int max, char modo[2])
+{
+    bool valido;
+
+    if ((strncmp(modo, "()", 2) == 0 && (validando > min && validando < max))
+        || (strncmp(modo, "(]", 2) == 0 && (validando > min && validando <= max))
+        || (strncmp(modo, "[)", 2) == 0 && (validando >= min && validando < max))
+        || (strncmp(modo, "[]", 2) == 0 && (validando >= min && validando <= max)))
+        valido = true;
+    else
+        valido = false;
+
+    return valido;
+}
+
 int escogerModo()
 {
     int opcionMenuP;
@@ -167,7 +184,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
         {
             printf("\n1) Matricula (Mayor que cero): "); //TODO: Validar esto posiblemente con otra funcion
             scanf("%ld", &alumnos[*offset].matricula);
-        } while (alumnos[*offset].matricula <= 0);
+        } while (!validarInt(alumnos[*offset].matricula, 0,  __INT_MAX__, "(]")); // (0, maximo]
 
         do
         {
@@ -187,7 +204,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
         {
             printf("\n4) Semestre (0-10): ");
             scanf("%d", &alumnos[*offset].semestre);
-        } while (alumnos[*offset].semestre < 1 || alumnos[*offset].semestre > 10);
+        } while (!validarInt(alumnos[*offset].semestre, 1, 10, "[]"));
 
         do // Este es para validar que la fecha introducida sea menor que la actual
         {
