@@ -1,8 +1,6 @@
 #include <stdio.h> 
 #include <string.h>
 #include <time.h>
-//#include "limpieza.h" 
-//#define fflush(stdin) limpieza()
 
 struct fecha
 {
