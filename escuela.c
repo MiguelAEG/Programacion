@@ -685,6 +685,7 @@ void listaAlumnos(struct datosAlumno alumnos[], int maxAlumnos)
         }
     }
 }
+
 void listaMaterias(struct datosMateria materias[], int maxMaterias)
 {
 
@@ -701,6 +702,7 @@ void listaMaterias(struct datosMateria materias[], int maxMaterias)
         }
     }
 }
+
 void listaGrupos(struct datosGrupo grupos[], int maxGrupos)
 {
 
@@ -733,6 +735,7 @@ void listaGrupos(struct datosGrupo grupos[], int maxGrupos)
             printf("%-10d%-14ls%-10d%-20ls", grupos[i].numGrupo, grupos[i].materias, grupos[i].semestre, grupos[i].profesores);
     }
 }
+
 void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripciones)
 {
 
