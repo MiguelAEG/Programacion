@@ -594,6 +594,8 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset,
 
         grupos[*offset].fechaCreacion = obtenerFechaActual();
 
+        (*offset)++;
+
         do
         {
             printf("\nAgregar otro grupo? (s/n)\n? ");
@@ -628,11 +630,13 @@ void inscripcion(struct datosInscripcion *inscripciones, int *offset,
             } while (!validarInt(inscripciones[*offset].matricula, 0,  __INT_MAX__, "(]")); // (0, maximo]
         } while (!buscarAlumno(alumnos, inscripciones[*offset].matricula, maxAlumnos)); // Validar que no exista ya, el -1 es para que no se encuentre a si mismo
 
-        grupos[*offset].fechaCreacion = obtenerFechaActual();
+        inscripciones[*offset].fechaCreacion = obtenerFechaActual();
+
+        (*offset)++;
 
         do
         {
-            printf("\nAgregar otro grupo? (s/n)\n? ");
+            printf("\nAgregar otra inscripcion? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
         } while (!validarRes(res));
