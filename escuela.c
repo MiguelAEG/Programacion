@@ -748,12 +748,12 @@ void listaGrupos(struct datosGrupo grupos[],struct fecha fechas[], int maxGrupos
 void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripciones)
 {
 
-    int i, clave;
-    printf("Clave Profesor: \n");
-    scanf("%d", &clave);
+    int i, grupo;
+    printf("Ingrese el grupo: \n");
+    scanf("%d", &grupo);
 
-    for (i=0; i<maxMaterias; i++) {
-        if (clave==materias[i].clave) {
+    for (i=0; i<maxInscripciones; i++) {
+        if (grupo==inscripciones[i].numGrupo) {
             printf("Si funciona\n");
         }
     }
