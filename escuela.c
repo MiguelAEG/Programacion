@@ -58,7 +58,7 @@ int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
 void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
-void ingresarGrupos(struct datosGrupo *, int *); //TODO: esto tambien llevara los datos de la materia y profesores
+void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria [], int, struct datosProfesor [], int); //TODO: esto tambien llevara los datos de la materia y profesores
 void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
 
 int main()
@@ -92,7 +92,7 @@ int main()
                 break;
 
             case 4:
-                ingresarGrupos(listaGrupos, &contGrupos);
+                ingresarGrupos(listaGrupos, &contGrupos, listaMaterias, contMaterias, listaProfesores, contProfesores);
                 break;
 
             case 5:
@@ -366,7 +366,7 @@ void ingresarMaterias(struct datosMateria *materias, int *offset){
 
         do
         {
-            printf("\nAgregar otro alumno? (s/n)\n? ");
+            printf("\nAgregar otra materia? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
         } while (res != 's' && res != 'n');
@@ -445,9 +445,11 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
     } while (res == 's' && *offset < 100);
 }
 
-void ingresarGrupos(struct datosGrupo *grupos, int *offset)
+void ingresarGrupos(struct datosGrupo *grupos, int *offset, struct datosMateria materias[], int maxMaterias, struct datosProfesor profesores[], int maxProfesores)
 {
     char res;
+    int i;
+
     do
     {
         do
@@ -462,9 +464,30 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset)
             scanf("%d", &grupos[*offset].semestre);
         } while (!validarInt(grupos[*offset].numGrupo, 1, 10, "[]"));
 
-        // TODO: 3) Materias
+        printf("\n3) Materias\n");
+        res = 's';
+        i = 0;
+        while (i < 7 && res == 's')
+        {
+            printf("Materia %d de 7 maximo\n", i+1);
+            do
+            {
+                do
+                {
+                    printf("Ingrese el codigo del grupo\n?" );
+                    scanf("%d", &grupos[*offset].materias[i]);
+                } while (!validarInt(grupos[*offset].materias[i], 0, __INT_MAX__, "(]")); // Primero validar que sea mayor que cero
+            } while (!buscarMateria(materias, grupos[*offset].materias[i], maxMaterias));
+            
+            do
+            {
+                printf("\nAgregar otra materia? (s/n)\n? ");
+                fflush(stdin);
+                scanf("%c", &res);
+            } while (res != 's' && res != 'n');
+        }
 
-        // TODO: 4) Profesores, necesito primero las materias para esto
+        // TODO: 4) Profesores
 
         grupos[*offset].fechaCreacion = obtenerFechaActual();
 
