@@ -47,6 +47,8 @@ bool validarFecha(struct fecha, struct fecha);
 bool validarInt(int, int, int, char[2]);
 bool validarString(char *, int, int);
 bool validarRes(char);
+bool validarCorreo(char [40]);
+bool validarTelefono(long long int);
 
 bool buscarMateria(struct datosMateria *, int, int);
 bool buscarProfesor(struct datosProfesor *, int, int);
@@ -193,6 +195,30 @@ bool validarRes(char validando)
         valido=true;
     else
         valido=false;
+
+    return valido;
+}
+
+bool validarCorreo(char validando[40])
+{
+    bool valido;
+
+    if (strchr(validando, '@') == NULL || strchr(validando, '.') == NULL)  // strchr regresa NULL si no se encontro el caracter
+        valido = 0;
+    else
+        valido = 1;
+
+    return valido;
+}
+
+bool validarTelefono(long long int validando)
+{
+    bool valido;
+
+    if (validando >= 1000000000LL || validando <= 9999999999LL) //LL es de long long int para que sea posible comparar los numeros grandes
+        valido = 1;
+    else
+        valido = 0;
 
     return valido;
 }
@@ -356,20 +382,20 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
                 printf("\tc) Dia: ");
                 scanf("%d", &alumnos[*offset].fechaNac.dd);
             } while (!validarInt(alumnos[*offset].fechaNac.mm, 1, 31, "[]"));
-        } while (!validarFecha(alumnos[*offset].fechaNac, obtenerFechaActual())); // 0 significa que la fecha introducida es mayor o igual a la actual
-        
+        } while (!validarFecha(alumnos[*offset].fechaNac, obtenerFechaActual())); 
+
         do
         {
             printf("\n6) Correo electronico (Debe tener \'@\' y \'.\'): ");
             fflush(stdin);
             gets(alumnos[*offset].correo);
-        } while (strchr(alumnos[*offset].correo, '@') == NULL || strchr(alumnos[*offset].correo, '.') == NULL); // strchr regresa NULL si no se encontro el caracter
+        } while (!validarCorreo(alumnos[*offset].correo));
 
         do
         {
             printf("\n7) Telefono (10 digitos): ");
             scanf("%lld", &alumnos[*offset].telefono);
-        } while (alumnos[*offset].telefono < 1000000000LL || alumnos[*offset].telefono > 9999999999LL); //LL es de long long int para que sea posible comparar los numeros grandes
+        } while (!validarTelefono(alumnos[*offset].telefono)); 
 
         (*offset)++; // Aumenta la cantidad de alumnos
 
@@ -470,20 +496,20 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
                 printf("\tc) Dia: ");
                 scanf("%d", &profesores[*offset].fechaNac.dd);
             } while (!validarInt(profesores[*offset].fechaNac.mm, 1, 31, "[]"));
-        } while (!validarFecha(profesores[*offset].fechaNac, obtenerFechaActual())); // 0 significa que la fecha introducida es mayor o igual a la actual
+        } while (!validarFecha(profesores[*offset].fechaNac, obtenerFechaActual())); 
         
         do
         {
             printf("\n5) Correo electronico (Debe tener \'@\' y \'.\'): ");
             fflush(stdin);
             gets(profesores[*offset].correo);
-        } while (strchr(profesores[*offset].correo, '@') == NULL || strchr(profesores[*offset].correo, '.') == NULL); // strchr regresa NULL si no se encontro el caracter
+        } while (!validarCorreo(profesores[*offset].correo));
 
         do
         {
             printf("\n6) Telefono (10 digitos): ");
             scanf("%lld", &profesores[*offset].telefono);
-        } while (profesores[*offset].telefono < 1000000000LL || profesores[*offset].telefono > 9999999999LL); //LL es de long long int para que sea posible comparar los numeros grandes
+        } while (!validarTelefono(profesores[*offset].telefono)); 
 
         (*offset)++; // Aumenta la cantidad de alumnos
 
