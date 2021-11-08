@@ -702,30 +702,32 @@ void listaMaterias(struct datosMateria materias[], int maxMaterias)
 void listaGrupos(struct datosGrupo grupos[],struct fecha fechas[], int maxGrupos, int *offset)
 {
 
+    struct fecha fechaL;
+
     int i;
     printf("Ingresar la fecha: \n");
             do
             {
                 printf("\ta) A%co: ", 164); // 164 = ñ
-                scanf("%d", &fechas[*offset].aaaa);
-            } while (!validarInt(fechas[*offset].aaaa, 1900, __INT_MAX__, "(]"));
+                scanf("%d", &fechaL.aaaa);
+            } while (!validarInt(fechaL.aaaa, 1900, __INT_MAX__, "(]"));
 
             do
             {
                 printf("\tb) Mes: ");
-                scanf("%d", &fechas[*offset].mm);
-            } while (!validarInt(fechas[*offset].mm, 1, 12, "[]"));
+                scanf("%d", &fechaL.mm);
+            } while (!validarInt(fechaL.mm, 1, 12, "[]"));
             
             do
             {
                 printf("\tc) Dia: ");
-                scanf("%d", &fechas[*offset].dd);
-            } while (!validarInt(fechas[*offset].mm, 1, 31, "[]"));
+                scanf("%d", &fechaL.dd);
+            } while (!validarInt(fechaL.mm, 1, 31, "[]"));
 
 
 
     for (i=0; i<maxGrupos; i++) {
-        if (fechas[*offset]==grupos[i].fechaCreacion) {
+        if (fechaL.aaaa==grupos[i].fechaCreacion.aaaa) {
             printf("Si funciona\n");
         }
     }
@@ -764,11 +766,11 @@ void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProf
                 break;
 
             case 'c':
-                // listaGrupos();
+                listaGrupos(grupos, maxGrupos);
                 break;
 
             case 'd':
-                // listaInscripciones();
+                listaInscripciones(inscripciones, maxInscripciones);
                 break;
 
             case 'e':
