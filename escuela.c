@@ -59,7 +59,7 @@ int escogerModo(void);
 void ingresarAlumnos(struct datosAlumno *, int *);
 void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
-void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria [], int, struct datosProfesor [], int); //TODO: esto tambien llevara los datos de la materia y profesores
+void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria [], int, struct datosProfesor [], int);
 void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
 
 int main()
