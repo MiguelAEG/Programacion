@@ -65,33 +65,32 @@ void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlu
 int main()
 {
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
-    struct datosAlumno listaAlumnos[100] = {{.matricula = 12121, .telefono = 4343434343LL, .nombre = "yo", .carrera = "yrewfwf", .correo = "@.", .semestre = 7, .fechaNac = {.dd = 5, .mm = 9, .aaaa = 2002}},
+    struct datosAlumno listaAlumnos[100] = {{.matricula = 12121, .telefono = 4343434343LL, .nombre = "yo", .carrera = "Computacion", .correo = "@.", .semestre = 7, .fechaNac = {.dd = 5, .mm = 9, .aaaa = 2002}},
         {.matricula=1818182, .telefono=8898484848LL, .nombre="Miguel", .carrera="Computacion", .correo="miguel@gmail.com", .semestre =2, .fechaNac={.dd=4, .mm=1, .aaaa=2002}},
-        {.matricula=1919142, .telefono=8282828LL, .nombre="Pepe", .carrera="Dibujo", .correo="pepe@gmail.com", .semestre=3,.fechaNac={.dd=2, .mm=2, .aaaa=2032}},
-        {.matricula=1982823, .telefono=81182343LL, .nombre="Juan", .carrera="Computacion", .correo="juan@gmail.com" , .semestre=1, .fechaNac={.dd=1, .mm=3, .aaaa=2023}},
-        {.matricula=1234323, .telefono=92929213LL, .nombre="Jose", .carrera="Dibujo", .correo="jose@gmail.com", .semestre=5, .fechaNac={.dd=4, .mm=5, .aaaa=2020}}
-
+        {.matricula=1919142, .telefono=8282854528LL, .nombre="Pepe", .carrera="Dibujo", .correo="pepe@gmail.com", .semestre=3,.fechaNac={.dd=2, .mm=2, .aaaa=2002}},
+        {.matricula=1982823, .telefono=8118234543LL, .nombre="Juan", .carrera="Computacion", .correo="juan@gmail.com" , .semestre=1, .fechaNac={.dd=1, .mm=3, .aaaa=2010}},
+        {.matricula=1234323, .telefono=9292921763LL, .nombre="Jose", .carrera="Dibujo", .correo="jose@gmail.com", .semestre=5, .fechaNac={.dd=4, .mm=5, .aaaa=2020}}
     }; // A lo mucho 100 alumnos
-    struct datosProfesor listaProfesores[100]={{.telefono=1029394939LL, .numEmpleado=1, .coordinacion=3, .nombre="Pablo", .correo="pablo@gmail.com", .fechaNac={.dd=1, .mm=3, .aaaa=1223 }},
-    {.telefono=1029394939LL, .numEmpleado=1, .coordinacion=1, .nombre="Pablo", .correo="pablo@gmail.com", .fechaNac={.dd=1, .mm=2, .aaaa=1223 }},
-    {.telefono=2029394939LL, .numEmpleado=2, .coordinacion=2, .nombre="Tenorio", .correo="tenorio@gmail.com", .fechaNac={.dd=2, .mm=3, .aaaa=2343 }},
-    {.telefono=3029394939LL, .numEmpleado=3, .coordinacion=3, .nombre="Luis", .correo="luis@gmail.com", .fechaNac={.dd=3, .mm=4, .aaaa=3454 }},
-    {.telefono=4029394939LL, .numEmpleado=4, .coordinacion=4, .nombre="Jose", .correo="jose@gmail.com", .fechaNac={.dd=4, .mm=5, .aaaa=2345 }},
+    struct datosProfesor listaProfesores[100]={{.telefono=1029394939LL, .numEmpleado=11, .coordinacion=3, .nombre="Pabla", .correo="pabla@gmail.com", .fechaNac={.dd=1, .mm=3, .aaaa=1997 }},
+    {.telefono=1029394939LL, .numEmpleado=14, .coordinacion=1, .nombre="Pablo", .correo="pablo@gmail.com", .fechaNac={.dd=1, .mm=2, .aaaa=1960 }},
+    {.telefono=2029394939LL, .numEmpleado=254, .coordinacion=2, .nombre="Tenorio", .correo="tenorio@gmail.com", .fechaNac={.dd=2, .mm=3, .aaaa=2020 }},
+    {.telefono=3029394939LL, .numEmpleado=32, .coordinacion=3, .nombre="Luis", .correo="luis@gmail.com", .fechaNac={.dd=3, .mm=4, .aaaa=1978 }},
+    {.telefono=4029394939LL, .numEmpleado=44, .coordinacion=4, .nombre="Jose", .correo="jose@gmail.com", .fechaNac={.dd=4, .mm=5, .aaaa=2012 }}
     };// A lo mucho 100 profesores
     struct datosGrupo listaGrupos[100]; // A lo mucho 100 grupos
     struct datosInscripcion listaInscripciones[100]; // A lo mucho 100 inscripciones
-    struct datosMateria listaMaterias[100]={{.clave=1, .semestre=1, .nombre="Fisica"},
-    {.clave=1, .semestre=1, .nombre="Fisica"},
-    {.clave=2, .semestre=2, .nombre="Calculo"},
-    {.clave=3, .semestre=3, .nombre="Programacion"},
-    {.clave=4, .semestre=4, .nombre="Artes"},
+    struct datosMateria listaMaterias[100]={{.clave=31, .semestre=1, .nombre="Fisico"},
+    {.clave=13, .semestre=1, .nombre="Fisica"},
+    {.clave=21, .semestre=2, .nombre="Calculo"},
+    {.clave=34, .semestre=3, .nombre="Programacion"},
+    {.clave=42, .semestre=4, .nombre="Artes"}
     }; // A lo mucho 100 materias
 
-    contAlumnos = 0; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
-    contProfesores = 0; // Lo mismo para los profesores
+    contAlumnos = 5; // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
+    contProfesores = 5; // Lo mismo para los profesores
     contGrupos = 0; // Y para los grupos
     contInscripciones = 0; // Y las inscripciones
-    contMaterias = 0; // Y las materias
+    contMaterias = 5; // Y las materias
     while ((opcion = escogerModo()) != 7) 
     {
         switch(opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
