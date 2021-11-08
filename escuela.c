@@ -461,7 +461,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
 void ingresarGrupos(struct datosGrupo *grupos, int *offset, struct datosMateria materias[], int maxMaterias, struct datosProfesor profesores[], int maxProfesores)
 {
     char res;
-    int i;
+    int i, j;
 
     do
     {
@@ -482,16 +482,18 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset, struct datosMateria 
         i = 0;
         while (i < 7 && res == 's')
         {
-            printf("Materia %d de 7 maximo\n", i+1);
+            printf("Materia #%d de 7 maximo\n", i+1);
             do
             {
                 do
                 {
-                    printf("Ingrese el codigo del grupo\n?" );
+                    printf("Ingrese el numero de materia\n? " );
                     scanf("%d", &grupos[*offset].materias[i]);
-                } while (!validarInt(grupos[*offset].materias[i], 0, __INT_MAX__, "(]")); // Primero validar que sea mayor que cero
+                } while (!validarInt(grupos[*offset].materias[i], 0, __INT_MAX__, "(]"));
             } while (!buscarMateria(materias, grupos[*offset].materias[i], maxMaterias));
             
+            i++;
+
             do
             {
                 printf("\nAgregar otra materia? (s/n)\n? ");
@@ -500,7 +502,21 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset, struct datosMateria 
             } while (res != 's' && res != 'n');
         }
 
-        // TODO: 4) Profesores
+        printf("\n4) Profesores\n");
+        j = 0;
+        res = 's';
+        while (j < i && res == 's')
+        {
+            printf("Profesor de la materia #%d\n", j);
+            do
+            {
+                do
+                {
+                    printf("Ingrese la clave del profesor\n? " );
+                    scanf("%d", &grupos[*offset].profesores[i]);
+                } while (!validarInt(grupos[*offset].profesores[i], 0, __INT_MAX__, "(]"));
+            } while (!buscarProfesor(profesores, grupos[*offset].profesores[i], maxProfesores));
+        }
 
         grupos[*offset].fechaCreacion = obtenerFechaActual();
 
