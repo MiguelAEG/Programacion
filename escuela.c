@@ -56,7 +56,9 @@ bool buscarGrupo(struct datosGrupo *, int, int);
 bool buscarAlumno(struct datosAlumno *, int, int);
 
 struct fecha obtenerFechaActual();
+
 int escogerModo(void);
+char escogerModoReportes();
 
 void ingresarAlumnos(struct datosAlumno *, int *);
 void ingresarMaterias(struct datosMateria *, int *);
