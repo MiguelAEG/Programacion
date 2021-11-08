@@ -65,7 +65,8 @@ void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlu
 int main()
 {
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
-    struct datosAlumno listaAlumnos[100] = {{.matricula = 12121, .telefono = 4343434343LL, .nombre = "yo", .carrera = "yrewfwf", .correo = "@.", .semestre = 7, .fechaNac = {.dd = 5, .mm = 9, .aaaa = 2002}}}; // A lo mucho 100 alumnos
+    struct datosAlumno listaAlumnos[100] = {{.matricula = 12121, .telefono = 4343434343LL, .nombre = "yo", .carrera = "yrewfwf", .correo = "@.", .semestre = 7, .fechaNac = {.dd = 5, .mm = 9, .aaaa = 2002}},
+        {/*empieza aqui, uno en cada renglon pls*/}}; // A lo mucho 100 alumnos
     struct datosProfesor listaProfesores[100]; // A lo mucho 100 profesores
     struct datosGrupo listaGrupos[100]; // A lo mucho 100 grupos
     struct datosInscripcion listaInscripciones[100]; // A lo mucho 100 inscripciones
