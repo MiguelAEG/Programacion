@@ -60,7 +60,7 @@ void ingresarAlumnos(struct datosAlumno *, int *);
 void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria [], int, struct datosProfesor [], int);
-void inscripcion(struct datosInscripcion *, struct datosGrupo *, struct datosAlumno *, int *);
+void inscripcion(struct datosInscripcion *, int *, struct datosGrupo [], int, struct datosAlumno [], int);
 
 int main()
 {
@@ -112,7 +112,7 @@ int main()
                 break;
 
             case 5:
-                inscripcion(listaInscripciones, listaGrupos, listaAlumnos, &contInscripciones);
+                inscripcion(listaInscripciones, &contInscripciones, listaGrupos, contGrupos, listaAlumnos, contAlumnos);
                 break;
 
             case 6:
@@ -545,8 +545,8 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset, struct datosMateria 
     } while (res == 's' && *offset < 100);
 }
 
-void inscripcion(struct datosInscripcion *inscripciones, struct datosGrupo *grupos,
-    struct datosAlumno *alumnos, int *offset)
+void inscripcion(struct datosInscripcion *inscripciones, int *offset, 
+    struct datosGrupo grupos[], int maxGrupos, struct datosAlumno alumnos[], int maxAlumnos)
 {
     
 }
