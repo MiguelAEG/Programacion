@@ -66,12 +66,17 @@ void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria[], int, struct datosProfesor[], int);
 void inscripcion(struct datosInscripcion *, int *, struct datosGrupo[], int, struct datosAlumno[], int);
+
 void menuReportes(struct datosAlumno[], int, struct datosProfesor[], int, struct datosMateria[], int,
     struct datosGrupo[], int, struct datosInscripcion[], int);
-void listaAlumnos();
-void listaMaterias();
-void listaGrupos();
-void listaInscripcion();
+
+void listaAlumnos(struct datosAlumno[], int);
+void listaMaterias(struct datosMateria[], int);
+void listaGrupos(struct datosGrupo[], int);
+void listaInscripcion(struct datosInscripcion[], int);
+
+void generarArchivoAlum(struct datosAlumno[], int);
+void generarArchivoProf(struct datosProfesor[], int);
 
 int main()
 {
@@ -748,6 +753,42 @@ void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripc
     }
 }
 
+void generarArchivoAlum(struct datosAlumno alumnos[], int maxAlumnos)
+{
+    FILE *cfPtr;
+    int i;
+
+    cfPtr = fopen("alumnos.dat", "w");
+
+    if (cfPtr == NULL)
+        printf("No se ha podido crear el archivo\n");
+    else
+    {
+        for (i = 0; i < maxAlumnos; i++)
+            fwrite(&alumnos[i], sizeof(struct datosAlumno), 1, cfPtr);
+    }
+
+    fclose(cfPtr);
+}
+
+void generarArchivoProf(struct datosProfesor profesores[], int maxProfesores)
+{
+    FILE *cfPtr;
+    int i;
+
+    cfPtr = fopen("profesores.dat", "w");
+
+    if (cfPtr == NULL)
+        printf("No se ha podido crear el archivo\n");
+    else
+    {
+        for (i = 0; i < maxProfesores; i++)
+            fwrite(&profesores[i], sizeof(struct datosProfesor), 1, cfPtr);
+    }
+
+    fclose(cfPtr);
+}
+
 void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProfesor profesores[], int maxProfesores,
     struct datosMateria materias[], int maxMaterias, struct datosGrupo grupos[], int maxGrupos,
     struct datosInscripcion inscripciones[], int maxInscripciones)
@@ -775,11 +816,11 @@ void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProf
                 break;
 
             case 'e':
-                // generarArchivoAlum();
+                generarArchivoAlum(alumnos, maxAlumnos);
                 break;
 
             case 'f':
-                // generarArchivoProf();
+                generarArchivoProf(profesores, maxProfesores);
                 break;
 
             case 'g':
