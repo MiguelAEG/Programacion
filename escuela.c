@@ -679,10 +679,14 @@ void listaAlumnos(struct datosAlumno alumnos[], int maxAlumnos)
     int i;
     printf("Carrera: \n");
     scanf("%s", carrera);
+    printf("%-10s%-12s%-14s%-20s%-40s\n",
+                "Matricula", "telefono", "carrera", "correo", "nombre");
 
     for (i=0; i<maxAlumnos; i++) {
-        if (strncmp(carrera, alumnos[i].carrera, strlen(carrera))) {
-            printf("Si funciona\n");
+        if (strncmp(carrera, alumnos[i].carrera, strlen(carrera))==0) {
+    
+            printf("%-10ld%-12lld%-14s%-20s%-40s\n",alumnos[i].matricula, alumnos[i].telefono,
+                     alumnos[i].carrera, alumnos[i].correo, alumnos[i].nombre);
         }
     }
 }
@@ -693,13 +697,14 @@ void listaMaterias(struct datosMateria materias[], int maxMaterias)
     printf("Clave Profesor: \n");
     scanf("%d", &clave);
 
+    printf("%-7s%-15s\n", "Clave", "Nombre Materia");
     for (i=0; i<maxMaterias; i++) {
         if (clave==materias[i].clave) {
-            printf("Si funciona\n");
+            printf("%-7d%-15s\n", materias[i].clave, materias[i].nombre);
         }
     }
 }
-void listaGrupos(struct datosGrupo grupos[],struct fecha fechas[], int maxGrupos, int *offset)
+void listaGrupos(struct datosGrupo grupos[], int maxGrupos)
 {
 
     struct fecha fechaL;
@@ -724,12 +729,10 @@ void listaGrupos(struct datosGrupo grupos[],struct fecha fechas[], int maxGrupos
                 scanf("%d", &fechaL.dd);
             } while (!validarInt(fechaL.mm, 1, 31, "[]"));
 
-
-
+    printf("%-10s%-14s%-10s%-20s\n","Num grupo", "materias", "semestre", "profesores");
     for (i=0; i<maxGrupos; i++) {
-        if (fechaL.aaaa==grupos[i].fechaCreacion.aaaa) {
-            printf("Si funciona\n");
-        }
+        if(!validarFecha(grupos[i].fechaCreacion, fechaL) )           
+    printf("%-10d%-14ls%-10d%-20ls",grupos[i].numGrupo, grupos[i].materias, grupos[i].semestre, grupos[i].profesores);
     }
 }
 void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripciones)
@@ -738,10 +741,11 @@ void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripc
     int i, grupo;
     printf("Ingrese el grupo: \n");
     scanf("%d", &grupo);
-
+    printf("%-20s%-18s%-18s\n", "Fecha Inscripcion", "Num grupo", "Matricula");
     for (i=0; i<maxInscripciones; i++) {
         if (grupo==inscripciones[i].numGrupo) {
-            printf("Si funciona\n");
+    printf("%4d/%02d/%02d", inscripciones[i].fechaCreacion.aaaa, inscripciones[i].fechaCreacion.mm, inscripciones[i].fechaCreacion.dd);
+    printf("%18d%18ld\n", inscripciones[i].numGrupo,inscripciones[i].matricula);
         }
     }
 }
