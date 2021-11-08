@@ -295,9 +295,12 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
     {
         do
         {
-            printf("\n1) Matricula (Mayor que cero): ");
-            scanf("%ld", &alumnos[*offset].matricula);
-        } while (!validarInt(alumnos[*offset].matricula, 0,  __INT_MAX__, "(]")); // (0, maximo]
+            do
+            {
+                printf("\n1) Matricula (Mayor que cero): ");
+                scanf("%ld", &alumnos[*offset].matricula);
+            } while (!validarInt(alumnos[*offset].matricula, 0,  __INT_MAX__, "(]")); // (0, maximo]
+        } while (buscarAlumno(alumnos, alumnos[*offset].matricula, *offset - 1)); // Validar que no exista ya, el -1 es para que no se encuentre a si mismo
 
         do
         {
@@ -374,9 +377,12 @@ void ingresarMaterias(struct datosMateria *materias, int *offset)
     {
         do
         {
-            printf("\n1) Clave (Mayor que cero): ");
-            scanf("%d", &materias[*offset].clave);
-        } while (!validarInt(materias[*offset].clave, 0, __INT_MAX__, "(]"));
+            do
+            {
+                printf("\n1) Clave (Mayor que cero): ");
+                scanf("%d", &materias[*offset].clave);
+            } while (!validarInt(materias[*offset].clave, 0, __INT_MAX__, "(]"));
+        } while (buscarMateria(materias, materias[*offset].clave, *offset - 1)); // Validar que no exista ya, el -1 es para que no se encuentre a si mismo
 
         do
         {
@@ -410,9 +416,12 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
     {
         do
         {
-            printf("\n1) Numero de empleado (Mayor que cero): "); 
-            scanf("%d", &profesores[*offset].numEmpleado);
-        } while (!validarInt(profesores[*offset].numEmpleado, 0, __INT_MAX__, "(]"));
+            do
+            {
+                printf("\n1) Numero de empleado (Mayor que cero): "); 
+                scanf("%d", &profesores[*offset].numEmpleado);
+            } while (!validarInt(profesores[*offset].numEmpleado, 0, __INT_MAX__, "(]"));
+        } while (buscarProfesor(profesores, profesores[*offset].numEmpleado, *offset - 1)); // Validar que no exista ya, el -1 es para que no se encuentre a si mismo
 
         do
         {
@@ -484,9 +493,12 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset,
     {
         do
         {
-            printf("\n1) Numero de grupo (Mayor que cero): "); 
-            scanf("%d", &grupos[*offset].numGrupo);
-        } while (!validarInt(grupos[*offset].numGrupo, 0, __INT_MAX__, "(]"));
+            do
+            {
+                printf("\n1) Numero de grupo (Mayor que cero): "); 
+                scanf("%d", &grupos[*offset].numGrupo);
+            } while (!validarInt(grupos[*offset].numGrupo, 0, __INT_MAX__, "(]"));
+        } while (buscarGrupo(grupos, grupos[*offset].numGrupo, *offset - 1));
 
         do
         {
