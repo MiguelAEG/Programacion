@@ -282,7 +282,7 @@ int escogerModo()
     {
         printf("\nSeleccionar una opcion\n? ");
         scanf("%d", &opcionMenuP);
-    } while (opcionMenuP < 1 || opcionMenuP > 7);
+    } while (!validarInt(opcionMenuP, 1, 7, "[]"));
 
     return opcionMenuP;
 }
@@ -304,14 +304,14 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             printf("\n2) Nombre: ");
             fflush(stdin);
             gets(alumnos[*offset].nombre);
-        } while (strlen(alumnos[*offset].nombre) == 0); // Longitud al menos 1
+        } while (!validarString(alumnos[*offset].nombre, 1, 40)); // Longitud al menos 1
 
         do
         {
             printf("\n3) Carrera: ");
             fflush(stdin);
             gets(alumnos[*offset].carrera);
-        } while (strlen(alumnos[*offset].carrera) == 0); // Longitud al menos 1. No lo pide pero es bueno añadirlo
+        } while (!validarString(alumnos[*offset].carrera, 1, 40)); // Longitud al menos 1. No lo pide pero es bueno añadirlo
         
         do
         {
@@ -362,13 +362,14 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             printf("\nAgregar otro alumno? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
-        } while (res != 's' && res != 'n');
+        } while (!validarRes(res));
     } while (res == 's' && *offset < 100); // Va de 0 a 99, el offset termina siendo 100 que representa la cantidad total
 }
 
-void ingresarMaterias(struct datosMateria *materias, int *offset){
-
+void ingresarMaterias(struct datosMateria *materias, int *offset)
+{
     char res;
+
     do
     {
         do
@@ -382,7 +383,7 @@ void ingresarMaterias(struct datosMateria *materias, int *offset){
             printf("\n2) Nombre: ");
             fflush(stdin);
             gets(materias[*offset].nombre);
-        } while (strlen(materias[*offset].nombre) == 0);
+        } while (!validarString(materias[*offset].nombre, 1, 40));
 
         do
         {       
@@ -397,14 +398,14 @@ void ingresarMaterias(struct datosMateria *materias, int *offset){
             printf("\nAgregar otra materia? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
-        } while (res != 's' && res != 'n');
+        } while (!validarRes(res));
     } while (res == 's' && *offset < 100);
-
 }
 
 void ingresarProfesores(struct datosProfesor *profesores, int *offset)
 {
     char res;
+
     do
     {
         do
@@ -418,7 +419,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
             printf("\n2) Nombre: ");
             fflush(stdin);
             gets(profesores[*offset].nombre);
-        } while (strlen(profesores[*offset].nombre) == 0); // Longitud al menos 1
+        } while (!validarString(profesores[*offset].nombre, 1, 40)); // Longitud al menos 1
 
         do
         {
@@ -469,7 +470,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
             printf("\nAgregar otro profesor? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
-        } while (res != 's' && res != 'n');
+        } while (!validarRes(res));
     } while (res == 's' && *offset < 100);
 }
 
@@ -540,7 +541,7 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset, struct datosMateria 
             printf("\nAgregar otro grupo? (s/n)\n? ");
             fflush(stdin);
             scanf("%c", &res);
-        } while (res != 's' && res != 'n');
+        } while (!validarRes(res));
     } while (res == 's' && *offset < 100);
 }
 
