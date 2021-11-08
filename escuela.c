@@ -71,7 +71,7 @@ void menuReportes(struct datosAlumno[], int, struct datosProfesor[], int, struct
     struct datosGrupo[], int, struct datosInscripcion[], int);
 
 void listaAlumnos(struct datosAlumno[], int);
-void listaMaterias(struct datosMateria[], int);
+void listaMaterias(struct datosGrupo[], int, struct datosProfesor[], int, struct datosMateria[], int);
 void listaGrupos(struct datosGrupo[], int);
 void listaInscripcion(struct datosInscripcion[], int);
 
@@ -695,18 +695,38 @@ void listaAlumnos(struct datosAlumno alumnos[], int maxAlumnos)
     }
 }
 
-void listaMaterias(struct datosMateria materias[], int maxMaterias)
+void listaMaterias(struct datosGrupo grupos[], int maxGrupos, struct datosProfesor profesores[], int maxProfesores,
+    struct datosMateria materias[], int maxMaterias)
 { // FIXME: estas comparando la clave del profesor con la clave de la materia
-    int i, clave;
+    int i, j, k, claveP, claveM;
 
-    printf("Clave Profesor: \n");
-    scanf("%d", &clave);
-
-    printf("%-7s%-20s\n", "Clave", "Nombre Materia");
-    for (i = 0; i < maxMaterias; i++)
+    do
     {
-        if (clave == materias[i].clave)
-            printf("%-7d%-20s\n", materias[i].clave, materias[i].nombre);
+        printf("Ingresar clave del profesor: \n");
+        scanf("%d", &claveP);
+    } while (!buscarProfesor(profesores, claveP, maxProfesores));
+
+    printf("%-7s %-20s\n", "Clave", "Materia");
+    for (i = 0; i < maxGrupos; i++) // Primero recorre todos los grupos
+    {
+        j = 0;
+        while (grupos[i].profesores[j] != 0 && j < 7) // Dentro de todos los grupos recorre cada profesor y compara
+        {
+            if (grupos[i].profesores[j] == claveP)
+            {
+                claveM = grupos[i].materias[j]; // Para buscar la clave de la materia
+
+                k = 0;
+                while (materias[k].clave != claveM) // Busca la clave de la materia
+                {
+                    k++;
+                }
+
+                printf("%-7d %-20s\n", claveM, materias[k].nombre);
+            }
+
+            j++;
+        }
     }
 }
 
@@ -801,7 +821,7 @@ void abrirArchivo()
     struct datosProfesor profesor;
 
     printf("\n1) Abrir archivo de alumnos\n"
-        "2)Abrir archivo de profesores\n");
+        "2) Abrir archivo de profesores\n");
     do
     {
         printf("Seleccionar una opcion\n? ");
@@ -863,7 +883,7 @@ void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProf
                 break;
 
             case 'b':
-                listaMaterias(materias, maxMaterias);
+                listaMaterias(grupos, maxGrupos, profesores, maxProfesores, materias, maxMaterias);
                 break;
 
             case 'c':
