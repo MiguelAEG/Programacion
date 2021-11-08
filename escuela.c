@@ -789,6 +789,59 @@ void generarArchivoProf(struct datosProfesor profesores[], int maxProfesores)
     fclose(cfPtr);
 }
 
+void abrirArchivo()
+{
+    FILE *cfPtr;
+    int opc;
+    struct datosAlumno alumno;
+    struct datosProfesor profesor;
+
+    printf("\n1) Abrir archivo de alumnos\n"
+        "2)Abrir archivo de profesores\n");
+    do
+    {
+        printf("Seleccionar una opcion\n? ");
+        scanf("%d", &opc);
+    } while (!validarInt(opc, 1, 2, "[]"));
+
+    if (opc == 1)
+    {
+        cfPtr = fopen("alumnos.dat", "r");
+        rewind(cfPtr);
+
+        printf("%-9s %-10s %-15s %-20s %-8s %10s %-40s\n",
+            "Matricula", "Telefono", "Carrera", "Correo", "Semestre",
+            "Nacimiento", "Nombre");
+        while (!feof(cfPtr))
+        {
+            fread(&alumno, sizeof(struct datosAlumno), 1, cfPtr);
+
+            printf("%-9ld %-10lld %-15s %-20s %-8d %4d/%02d/%02d %-40s\n",
+                alumno.matricula, alumno.telefono, alumno.carrera, alumno.correo,
+                alumno.semestre, alumno.fechaNac.aaaa, alumno.fechaNac.mm,
+                alumno.fechaNac.dd, alumno.nombre);
+
+        }
+    }
+    else
+    {
+        cfPtr = fopen("profesores.dat", "r");
+        rewind(cfPtr);
+        printf("%-8s %-10s %-14s %-20s %10s %-40s\n",
+            "Numero", "Telefono", "Coordinacion", "Correo",
+            "Nacimiento", "Nombre");
+        while (!feof(cfPtr))
+        {
+            fread(&profesor, sizeof(struct datosProfesor), 1, cfPtr);
+
+            printf("%-8d %-10lld %-14d %-20s %4d/%02d/%02d %-40s\n",
+                profesor.numEmpleado, profesor.telefono, profesor.coordinacion,
+                profesor.correo, profesor.fechaNac.aaaa, profesor.fechaNac.mm,
+                profesor.fechaNac.dd, profesor.nombre);
+        }
+    }
+}
+
 void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProfesor profesores[], int maxProfesores,
     struct datosMateria materias[], int maxMaterias, struct datosGrupo grupos[], int maxGrupos,
     struct datosInscripcion inscripciones[], int maxInscripciones)
@@ -824,7 +877,7 @@ void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProf
                 break;
 
             case 'g':
-                // abrirArchivo();
+                abrirArchivo();
                 break;
         }
     }
