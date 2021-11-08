@@ -296,6 +296,7 @@ bool buscarAlumno(struct datosAlumno *alumnos, int busqueda, int max)
     
     return encontrado;
 }
+
 struct fecha obtenerFechaActual() {
     time_t t = time(NULL); // Inicializar la variable que se usara para la estructura
     struct tm *fechayhora; // Estructura tm definida en time.h
