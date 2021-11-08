@@ -12,7 +12,7 @@ struct datosAlumno
 {
     long int matricula;
     long long int telefono;
-    char nombre[40], carrera[40], correo[40];
+    char nombre[40], carrera[15], correo[20];
     int semestre;
     struct fecha fechaNac;
 };
@@ -20,14 +20,14 @@ struct datosAlumno
 struct datosMateria
 {
     int clave, semestre;
-    char nombre[40];
+    char nombre[20];
 };
 
 struct datosProfesor
 {
     long long int telefono;
     int numEmpleado, coordinacion;
-    char nombre[40], correo[40];
+    char nombre[40], correo[20];
     struct fecha fechaNac;
 };
 
@@ -358,7 +358,7 @@ void ingresarAlumnos(struct datosAlumno *alumnos, int *offset)
             printf("\n3) Carrera: ");
             fflush(stdin);
             gets(alumnos[*offset].carrera);
-        } while (!validarString(alumnos[*offset].carrera, 1, 40)); // Longitud al menos 1. No lo pide pero es bueno añadirlo
+        } while (!validarString(alumnos[*offset].carrera, 1, 15)); // Longitud al menos 1. No lo pide pero es bueno añadirlo
 
         do
         {
@@ -433,7 +433,7 @@ void ingresarMaterias(struct datosMateria *materias, int *offset)
             printf("\n2) Nombre: ");
             fflush(stdin);
             gets(materias[*offset].nombre);
-        } while (!validarString(materias[*offset].nombre, 1, 40));
+        } while (!validarString(materias[*offset].nombre, 1, 20));
 
         do
         {
@@ -668,47 +668,44 @@ char escogerModoReportes()
 
 void listaAlumnos(struct datosAlumno alumnos[], int maxAlumnos)
 {
-
-    char carrera[40];
+    char carrera[15];
     int i;
+
     printf("Carrera: \n");
+    fflush(stdin);
     scanf("%s", carrera);
-    printf("%-10s%-12s%-14s%-20s%-40s\n",
-        "Matricula", "telefono", "carrera", "correo", "nombre");
+
+    printf("%-10s%-12s%-16s%-20s%-40s\n",
+        "Matricula", "Telefono", "Carrera", "Correo", "Nombre");
 
     for (i = 0; i < maxAlumnos; i++)
     {
         if (strncmp(carrera, alumnos[i].carrera, strlen(carrera)) == 0)
-        {
-            printf("%-10ld%-12lld%-14s%-20s%-40s\n", alumnos[i].matricula, alumnos[i].telefono,
+            printf("%-10ld%-12lld%-16s%-20s%-40s\n", alumnos[i].matricula, alumnos[i].telefono,
                 alumnos[i].carrera, alumnos[i].correo, alumnos[i].nombre);
-        }
     }
 }
 
 void listaMaterias(struct datosMateria materias[], int maxMaterias)
-{
-
+{ // FIXME: estas comparando la clave del profesor con la clave de la materia
     int i, clave;
+
     printf("Clave Profesor: \n");
     scanf("%d", &clave);
 
-    printf("%-7s%-15s\n", "Clave", "Nombre Materia");
+    printf("%-7s%-20s\n", "Clave", "Nombre Materia");
     for (i = 0; i < maxMaterias; i++)
     {
         if (clave == materias[i].clave)
-        {
-            printf("%-7d%-15s\n", materias[i].clave, materias[i].nombre);
-        }
+            printf("%-7d%-20s\n", materias[i].clave, materias[i].nombre);
     }
 }
 
 void listaGrupos(struct datosGrupo grupos[], int maxGrupos)
-{
-
+{ // FIXME: algo anda mal
     struct fecha fechaL;
-
     int i;
+
     printf("Ingresar la fecha: \n");
     do
     {
@@ -738,18 +735,16 @@ void listaGrupos(struct datosGrupo grupos[], int maxGrupos)
 
 void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripciones)
 {
-
     int i, grupo;
+
     printf("Ingrese el grupo: \n");
     scanf("%d", &grupo);
+
     printf("%-20s%-18s%-18s\n", "Fecha Inscripcion", "Num grupo", "Matricula");
     for (i = 0; i < maxInscripciones; i++)
     {
         if (grupo == inscripciones[i].numGrupo)
-        {
-            printf("%4d/%02d/%02d", inscripciones[i].fechaCreacion.aaaa, inscripciones[i].fechaCreacion.mm, inscripciones[i].fechaCreacion.dd);
-            printf("%18d%18ld\n", inscripciones[i].numGrupo, inscripciones[i].matricula);
-        }
+            printf("%4d/%02d/%02d%-18d%-18ld\n", inscripciones[i].fechaCreacion.aaaa, inscripciones[i].fechaCreacion.mm, inscripciones[i].fechaCreacion.dd, inscripciones[i].numGrupo, inscripciones[i].matricula);
     }
 }
 
