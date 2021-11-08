@@ -67,7 +67,7 @@ void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria[], int, struct datosProfesor[], int);
 void inscripcion(struct datosInscripcion *, int *, struct datosGrupo[], int, struct datosAlumno[], int);
 void menuReportes(struct datosAlumno[], int, struct datosProfesor[], int, struct datosMateria[], int,
-                  struct datosGrupo[], int, struct datosInscripcion[], int);
+    struct datosGrupo[], int, struct datosInscripcion[], int);
 void listaAlumnos();
 void listaMaterias();
 void listaGrupos();
@@ -81,17 +81,17 @@ int main()
         {.matricula = 1818182, .telefono = 8898484848LL, .nombre = "Miguel", .carrera = "Computacion", .correo = "miguel@gmail.com", .semestre = 2, .fechaNac = {.dd = 4, .mm = 1, .aaaa = 2002}},
         {.matricula = 1919142, .telefono = 8282854528LL, .nombre = "Pepe", .carrera = "Dibujo", .correo = "pepe@gmail.com", .semestre = 3, .fechaNac = {.dd = 2, .mm = 2, .aaaa = 2002}},
         {.matricula = 1982823, .telefono = 8118234543LL, .nombre = "Juan", .carrera = "Computacion", .correo = "juan@gmail.com", .semestre = 1, .fechaNac = {.dd = 1, .mm = 3, .aaaa = 2010}},
-        {.matricula = 1234323, .telefono = 9292921763LL, .nombre = "Jose", .carrera = "Dibujo", .correo = "jose@gmail.com", .semestre = 5, .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2020}}}; // A lo mucho 100 alumnos
+        {.matricula = 1234323, .telefono = 9292921763LL, .nombre = "Jose", .carrera = "Dibujo", .correo = "jose@gmail.com", .semestre = 5, .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2020}} }; // A lo mucho 100 alumnos
     struct datosProfesor listaProfesores[100] = {
         {.telefono = 1029394939LL, .numEmpleado = 11, .coordinacion = 3, .nombre = "Pabla", .correo = "pabla@gmail.com", .fechaNac = {.dd = 1, .mm = 3, .aaaa = 1997}},
         {.telefono = 1029394939LL, .numEmpleado = 14, .coordinacion = 1, .nombre = "Pablo", .correo = "pablo@gmail.com", .fechaNac = {.dd = 1, .mm = 2, .aaaa = 1960}},
         {.telefono = 2029394939LL, .numEmpleado = 254, .coordinacion = 2, .nombre = "Tenorio", .correo = "tenorio@gmail.com", .fechaNac = {.dd = 2, .mm = 3, .aaaa = 2020}},
         {.telefono = 3029394939LL, .numEmpleado = 32, .coordinacion = 3, .nombre = "Luis", .correo = "luis@gmail.com", .fechaNac = {.dd = 3, .mm = 4, .aaaa = 1978}},
-        {.telefono = 4029394939LL, .numEmpleado = 44, .coordinacion = 4, .nombre = "Jose", .correo = "jose@gmail.com", .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2012}}}; // A lo mucho 100 profesores
+        {.telefono = 4029394939LL, .numEmpleado = 44, .coordinacion = 4, .nombre = "Jose", .correo = "jose@gmail.com", .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2012}} }; // A lo mucho 100 profesores
     struct datosGrupo listaGrupos[100] = {
         {.numGrupo = 543, .semestre = 2, .materias = {31, 13, 21}, .profesores = {14, 14, 254}, .fechaCreacion = {.dd = 27, .mm = 10, .aaaa = 2021}},
         {.numGrupo = 53, .semestre = 4, .materias = {34, 42}, .profesores = {32, 44}, .fechaCreacion = {.dd = 25, .mm = 10, .aaaa = 2021}},
-        {.numGrupo = 43, .semestre = 2, .materias = {31, 21, 34}, .profesores = {254, 32, 44}, .fechaCreacion = {.dd = 30, .mm = 10, .aaaa = 2021}}}; // A lo mucho 100 grupos
+        {.numGrupo = 43, .semestre = 2, .materias = {31, 21, 34}, .profesores = {254, 32, 44}, .fechaCreacion = {.dd = 30, .mm = 10, .aaaa = 2021}} }; // A lo mucho 100 grupos
     struct datosInscripcion listaInscripciones[100] = {
         {.matricula = 1818182, .numGrupo = 53, .fechaCreacion = {.dd = 4, .mm = 11, .aaaa = 2021}},
         {.matricula = 1234323, .numGrupo = 43, .fechaCreacion = {.dd = 5, .mm = 11, .aaaa = 2021}},
@@ -104,7 +104,7 @@ int main()
         {.clave = 13, .semestre = 1, .nombre = "Fisica"},
         {.clave = 21, .semestre = 2, .nombre = "Calculo"},
         {.clave = 34, .semestre = 3, .nombre = "Programacion"},
-        {.clave = 42, .semestre = 4, .nombre = "Artes"}}; // A lo mucho 100 materias
+        {.clave = 42, .semestre = 4, .nombre = "Artes"} }; // A lo mucho 100 materias
 
     contAlumnos = 5;       // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
     contProfesores = 5;    // Lo mismo para los profesores
@@ -115,30 +115,30 @@ int main()
     {
         switch (opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
         {
-        case 1:
-            ingresarAlumnos(listaAlumnos, &contAlumnos);
-            break;
+            case 1:
+                ingresarAlumnos(listaAlumnos, &contAlumnos);
+                break;
 
-        case 2:
-            ingresarMaterias(listaMaterias, &contMaterias);
-            break;
+            case 2:
+                ingresarMaterias(listaMaterias, &contMaterias);
+                break;
 
-        case 3:
-            ingresarProfesores(listaProfesores, &contProfesores);
-            break;
+            case 3:
+                ingresarProfesores(listaProfesores, &contProfesores);
+                break;
 
-        case 4:
-            ingresarGrupos(listaGrupos, &contGrupos, listaMaterias, contMaterias, listaProfesores, contProfesores);
-            break;
+            case 4:
+                ingresarGrupos(listaGrupos, &contGrupos, listaMaterias, contMaterias, listaProfesores, contProfesores);
+                break;
 
-        case 5:
-            inscripcion(listaInscripciones, &contInscripciones, listaGrupos, contGrupos, listaAlumnos, contAlumnos);
-            break;
+            case 5:
+                inscripcion(listaInscripciones, &contInscripciones, listaGrupos, contGrupos, listaAlumnos, contAlumnos);
+                break;
 
-        case 6:
-            menuReportes(listaAlumnos, contAlumnos, listaProfesores, contProfesores, listaMaterias,
-                         contMaterias, listaGrupos, contGrupos, listaInscripciones, contInscripciones);
-            break;
+            case 6:
+                menuReportes(listaAlumnos, contAlumnos, listaProfesores, contProfesores, listaMaterias,
+                    contMaterias, listaGrupos, contGrupos, listaInscripciones, contInscripciones);
+                break;
         }
     }
 
@@ -314,13 +314,13 @@ int escogerModo()
     int opcionMenuP;
 
     printf("\n\tMenu principal\n"
-           "1) Alumnos\n"
-           "2) Materias\n"
-           "3) Profesores\n"
-           "4) Grupos\n"
-           "5) Inscripcion\n"
-           "6) Reportes\n"
-           "7) Salir\n");
+        "1) Alumnos\n"
+        "2) Materias\n"
+        "3) Profesores\n"
+        "4) Grupos\n"
+        "5) Inscripcion\n"
+        "6) Reportes\n"
+        "7) Salir\n");
 
     do
     {
@@ -528,7 +528,7 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
 }
 
 void ingresarGrupos(struct datosGrupo *grupos, int *offset,
-                    struct datosMateria materias[], int maxMaterias, struct datosProfesor profesores[], int maxProfesores)
+    struct datosMateria materias[], int maxMaterias, struct datosProfesor profesores[], int maxProfesores)
 {
     char res;
     int i, j;
@@ -605,7 +605,7 @@ void ingresarGrupos(struct datosGrupo *grupos, int *offset,
 }
 
 void inscripcion(struct datosInscripcion *inscripciones, int *offset,
-                 struct datosGrupo grupos[], int maxGrupos, struct datosAlumno alumnos[], int maxAlumnos)
+    struct datosGrupo grupos[], int maxGrupos, struct datosAlumno alumnos[], int maxAlumnos)
 {
     char res;
 
@@ -647,14 +647,14 @@ char escogerModoReportes()
     char opcionMenuR;
 
     printf("\n\tMenu de reportes\n"
-           "a) Listado de alumnos por carrera\n"
-           "b) Listado de materias que imparte un profesor\n"
-           "c) Listado de grupos por fecha\n"
-           "d) Listado de inscripciones por grupo\n"
-           "e) Generar archivo de alumnos\n"
-           "f) Generar archivo de profesores\n"
-           "g) Mostrar un archivo\n"
-           "h) Salir\n");
+        "a) Listado de alumnos por carrera\n"
+        "b) Listado de materias que imparte un profesor\n"
+        "c) Listado de grupos por fecha\n"
+        "d) Listado de inscripciones por grupo\n"
+        "e) Generar archivo de alumnos\n"
+        "f) Generar archivo de profesores\n"
+        "g) Mostrar un archivo\n"
+        "h) Salir\n");
 
     do
     {
@@ -674,15 +674,14 @@ void listaAlumnos(struct datosAlumno alumnos[], int maxAlumnos)
     printf("Carrera: \n");
     scanf("%s", carrera);
     printf("%-10s%-12s%-14s%-20s%-40s\n",
-           "Matricula", "telefono", "carrera", "correo", "nombre");
+        "Matricula", "telefono", "carrera", "correo", "nombre");
 
     for (i = 0; i < maxAlumnos; i++)
     {
         if (strncmp(carrera, alumnos[i].carrera, strlen(carrera)) == 0)
         {
-
             printf("%-10ld%-12lld%-14s%-20s%-40s\n", alumnos[i].matricula, alumnos[i].telefono,
-                   alumnos[i].carrera, alumnos[i].correo, alumnos[i].nombre);
+                alumnos[i].carrera, alumnos[i].correo, alumnos[i].nombre);
         }
     }
 }
@@ -752,8 +751,8 @@ void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripc
 }
 
 void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProfesor profesores[], int maxProfesores,
-                  struct datosMateria materias[], int maxMaterias, struct datosGrupo grupos[], int maxGrupos,
-                  struct datosInscripcion inscripciones[], int maxInscripciones)
+    struct datosMateria materias[], int maxMaterias, struct datosGrupo grupos[], int maxGrupos,
+    struct datosInscripcion inscripciones[], int maxInscripciones)
 {
     char opcion;
 
@@ -761,33 +760,33 @@ void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProf
     {
         switch (opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
         {
-        case 'a':
-            listaAlumnos(alumnos, maxAlumnos);
-            break;
+            case 'a':
+                listaAlumnos(alumnos, maxAlumnos);
+                break;
 
-        case 'b':
-            listaMaterias(materias, maxMaterias);
-            break;
+            case 'b':
+                listaMaterias(materias, maxMaterias);
+                break;
 
-        case 'c':
-            listaGrupos(grupos, maxGrupos);
-            break;
+            case 'c':
+                listaGrupos(grupos, maxGrupos);
+                break;
 
-        case 'd':
-            listaInscripciones(inscripciones, maxInscripciones);
-            break;
+            case 'd':
+                listaInscripciones(inscripciones, maxInscripciones);
+                break;
 
-        case 'e':
-            // generarArchivoAlum();
-            break;
+            case 'e':
+                // generarArchivoAlum();
+                break;
 
-        case 'f':
-            // generarArchivoProf();
-            break;
+            case 'f':
+                // generarArchivoProf();
+                break;
 
-        case 'g':
-            // abrirArchivo();
-            break;
+            case 'g':
+                // abrirArchivo();
+                break;
         }
     }
 }
