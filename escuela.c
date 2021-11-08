@@ -150,7 +150,6 @@ bool validarString(char *validando, int minL, int maxL)
 
     if (validarInt(strlen(validando), minL, maxL, "[]"))
         valido = true;
-    
     else
         valido = false;
 
