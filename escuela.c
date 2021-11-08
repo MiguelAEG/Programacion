@@ -83,20 +83,23 @@ int main()
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
     struct datosAlumno listaAlumnos[100] = {
         {.matricula = 1212143, .telefono = 4343434343LL, .nombre = "Cesar", .carrera = "Computacion", .correo = "@.", .semestre = 7, .fechaNac = {.dd = 5, .mm = 9, .aaaa = 2002}},
-        {.matricula = 1818182, .telefono = 8898484848LL, .nombre = "Miguel", .carrera = "Computacion", .correo = "miguel@gmail.com", .semestre = 2, .fechaNac = {.dd = 4, .mm = 1, .aaaa = 2002}},
         {.matricula = 1919142, .telefono = 8282854528LL, .nombre = "Pepe", .carrera = "Dibujo", .correo = "pepe@gmail.com", .semestre = 3, .fechaNac = {.dd = 2, .mm = 2, .aaaa = 2002}},
+        {.matricula = 1818182, .telefono = 8898484848LL, .nombre = "Miguel", .carrera = "Computacion", .correo = "miguel@gmail.com", .semestre = 2, .fechaNac = {.dd = 4, .mm = 1, .aaaa = 2002}},
         {.matricula = 1982823, .telefono = 8118234543LL, .nombre = "Juan", .carrera = "Computacion", .correo = "juan@gmail.com", .semestre = 1, .fechaNac = {.dd = 1, .mm = 3, .aaaa = 2010}},
-        {.matricula = 1234323, .telefono = 9292921763LL, .nombre = "Jose", .carrera = "Dibujo", .correo = "jose@gmail.com", .semestre = 5, .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2020}} }; // A lo mucho 100 alumnos
+        {.matricula = 1234323, .telefono = 9292921763LL, .nombre = "Jose", .carrera = "Dibujo", .correo = "jose@gmail.com", .semestre = 5, .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2020}}
+    }; // A lo mucho 100 alumnos
     struct datosProfesor listaProfesores[100] = {
-        {.telefono = 1029394939LL, .numEmpleado = 11, .coordinacion = 3, .nombre = "Pabla", .correo = "pabla@gmail.com", .fechaNac = {.dd = 1, .mm = 3, .aaaa = 1997}},
+        {.telefono = 5434424253LL, .numEmpleado = 11, .coordinacion = 3, .nombre = "Alguien", .correo = "alguien@gmail.com", .fechaNac = {.dd = 1, .mm = 3, .aaaa = 1997}},
         {.telefono = 1029394939LL, .numEmpleado = 14, .coordinacion = 1, .nombre = "Pablo", .correo = "pablo@gmail.com", .fechaNac = {.dd = 1, .mm = 2, .aaaa = 1960}},
         {.telefono = 2029394939LL, .numEmpleado = 254, .coordinacion = 2, .nombre = "Tenorio", .correo = "tenorio@gmail.com", .fechaNac = {.dd = 2, .mm = 3, .aaaa = 2020}},
         {.telefono = 3029394939LL, .numEmpleado = 32, .coordinacion = 3, .nombre = "Luis", .correo = "luis@gmail.com", .fechaNac = {.dd = 3, .mm = 4, .aaaa = 1978}},
-        {.telefono = 4029394939LL, .numEmpleado = 44, .coordinacion = 4, .nombre = "Jose", .correo = "jose@gmail.com", .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2012}} }; // A lo mucho 100 profesores
+        {.telefono = 4029394939LL, .numEmpleado = 44, .coordinacion = 4, .nombre = "Jose", .correo = "jose@gmail.com", .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2012}}
+    }; // A lo mucho 100 profesores
     struct datosGrupo listaGrupos[100] = {
         {.numGrupo = 543, .semestre = 2, .materias = {31, 13, 21}, .profesores = {14, 14, 254}, .fechaCreacion = {.dd = 27, .mm = 10, .aaaa = 2021}},
         {.numGrupo = 53, .semestre = 4, .materias = {34, 42}, .profesores = {32, 44}, .fechaCreacion = {.dd = 25, .mm = 10, .aaaa = 2021}},
-        {.numGrupo = 43, .semestre = 2, .materias = {31, 21, 34}, .profesores = {254, 32, 44}, .fechaCreacion = {.dd = 30, .mm = 10, .aaaa = 2021}} }; // A lo mucho 100 grupos
+        {.numGrupo = 43, .semestre = 2, .materias = {31, 21, 34}, .profesores = {254, 32, 44}, .fechaCreacion = {.dd = 30, .mm = 10, .aaaa = 2021}}
+    }; // A lo mucho 100 grupos
     struct datosInscripcion listaInscripciones[100] = {
         {.matricula = 1818182, .numGrupo = 53, .fechaCreacion = {.dd = 4, .mm = 11, .aaaa = 2021}},
         {.matricula = 1234323, .numGrupo = 43, .fechaCreacion = {.dd = 5, .mm = 11, .aaaa = 2021}},
@@ -109,7 +112,8 @@ int main()
         {.clave = 13, .semestre = 1, .nombre = "Fisica"},
         {.clave = 21, .semestre = 2, .nombre = "Calculo"},
         {.clave = 34, .semestre = 3, .nombre = "Programacion"},
-        {.clave = 42, .semestre = 4, .nombre = "Artes"} }; // A lo mucho 100 materias
+        {.clave = 42, .semestre = 4, .nombre = "Artes"}
+    }; // A lo mucho 100 materias
 
     contAlumnos = 5;       // Esto es para asegurarse de que siempre se ponga un alumno nuevo en la siguiente casilla disponible
     contProfesores = 5;    // Lo mismo para los profesores
@@ -792,7 +796,7 @@ void generarArchivoProf(struct datosProfesor profesores[], int maxProfesores)
 void abrirArchivo()
 {
     FILE *cfPtr;
-    int opc;
+    int opc, db;
     struct datosAlumno alumno;
     struct datosProfesor profesor;
 
@@ -806,7 +810,7 @@ void abrirArchivo()
 
     if (opc == 1)
     {
-        cfPtr = fopen("alumnos.dat", "r");
+        cfPtr = fopen("alumnos.dat", "rb");
         rewind(cfPtr);
 
         printf("%-9s %-10s %-15s %-20s %-8s %10s %-40s\n",
@@ -814,30 +818,32 @@ void abrirArchivo()
             "Nacimiento", "Nombre");
         while (!feof(cfPtr))
         {
-            fread(&alumno, sizeof(struct datosAlumno), 1, cfPtr);
+            db = fread(&alumno, sizeof(struct datosAlumno), 1, cfPtr);
 
-            printf("%-9ld %-10lld %-15s %-20s %-8d %4d/%02d/%02d %-40s\n",
-                alumno.matricula, alumno.telefono, alumno.carrera, alumno.correo,
-                alumno.semestre, alumno.fechaNac.aaaa, alumno.fechaNac.mm,
-                alumno.fechaNac.dd, alumno.nombre);
+            if (db != 0)
+                printf("%-9ld %-10lld %-15s %-20s %-8d %4d/%02d/%02d %-40s\n",
+                    alumno.matricula, alumno.telefono, alumno.carrera, alumno.correo,
+                    alumno.semestre, alumno.fechaNac.aaaa, alumno.fechaNac.mm,
+                    alumno.fechaNac.dd, alumno.nombre);
 
         }
     }
     else
     {
-        cfPtr = fopen("profesores.dat", "r");
+        cfPtr = fopen("profesores.dat", "rb");
         rewind(cfPtr);
         printf("%-8s %-10s %-14s %-20s %10s %-40s\n",
             "Numero", "Telefono", "Coordinacion", "Correo",
             "Nacimiento", "Nombre");
         while (!feof(cfPtr))
         {
-            fread(&profesor, sizeof(struct datosProfesor), 1, cfPtr);
+            db = fread(&profesor, sizeof(struct datosProfesor), 1, cfPtr);
 
-            printf("%-8d %-10lld %-14d %-20s %4d/%02d/%02d %-40s\n",
-                profesor.numEmpleado, profesor.telefono, profesor.coordinacion,
-                profesor.correo, profesor.fechaNac.aaaa, profesor.fechaNac.mm,
-                profesor.fechaNac.dd, profesor.nombre);
+            if (db != 0)
+                printf("%-8d %-10lld %-14d %-20s %4d/%02d/%02d %-40s\n",
+                    profesor.numEmpleado, profesor.telefono, profesor.coordinacion,
+                    profesor.correo, profesor.fechaNac.aaaa, profesor.fechaNac.mm,
+                    profesor.fechaNac.dd, profesor.nombre);
         }
     }
 }
