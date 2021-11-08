@@ -46,7 +46,7 @@ struct datosInscripcion
 bool validarFecha(struct fecha, struct fecha);
 bool validarInt(int, int, int, char[2]);
 bool validarString(char *, int, int);
-
+bool validarRes(char);
 bool buscarMateria(struct datosMateria *, int, int *);
 bool buscarProfesor(struct datosProfesor *, int, int *);
 bool buscarGrupo(struct datosGrupo *, int, int *);
@@ -153,6 +153,18 @@ bool validarString(char *validando, int minL, int maxL)
     
     else
         valido = false;
+
+    return valido;
+}
+bool validarRes(char validando)
+{
+    bool valido;
+
+    if(validando=='s' || validando=='n')
+        valido=true;
+
+    else
+     valido=false;
 
     return valido;
 }
