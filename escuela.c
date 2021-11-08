@@ -63,6 +63,8 @@ void ingresarMaterias(struct datosMateria *, int *);
 void ingresarProfesores(struct datosProfesor *, int *);
 void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria [], int, struct datosProfesor [], int);
 void inscripcion(struct datosInscripcion *, int *, struct datosGrupo [], int, struct datosAlumno [], int);
+void menuReportes(struct datosAlumno [], int, struct datosProfesor [], int, struct datosMateria [], int,
+    struct datosGrupo [], int, struct datosInscripcion [], int);
 
 int main()
 {
@@ -131,7 +133,8 @@ int main()
                 break;
 
             case 6:
-                // reportes
+                menuReportes(listaAlumnos, contAlumnos, listaProfesores, contProfesores, listaMaterias,
+                    contMaterias, listaGrupos, contGrupos, listaInscripciones, contInscripciones);
                 break;
             
         }
@@ -601,4 +604,70 @@ void inscripcion(struct datosInscripcion *inscripciones, int *offset,
     struct datosGrupo grupos[], int maxGrupos, struct datosAlumno alumnos[], int maxAlumnos)
 {
     
+}
+
+char escogerModoReportes()
+{
+    char opcionMenuR;
+
+    printf("\n\tMenu de reportes\n"
+        "a) Listado de alumnos por carrera\n"
+        "b) Listado de materias que imparte un profesor\n"
+        "c) Listado de grupos por fecha\n"
+        "d) Listado de inscripciones por grupo\n"
+        "e) Generar archivo de alumnos\n"
+        "f) Generar archivo de profesores\n"
+        "g) Mostrar un archivo\n"
+        "h) Salir\n");
+
+    do
+    {
+        printf("\nSeleccionar una opcion\n? ");
+        fflush(stdin);
+        scanf("%c", &opcionMenuR);
+    } while (!validarInt(opcionMenuR, 'a', 'h', "[]"));
+
+    return opcionMenuR;
+}
+
+void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProfesor profesores[], int maxProfesores,
+    struct datosMateria materias[], int maxMaterias, struct datosGrupo grupos[], int maxGrupos,
+    struct datosInscripcion inscripciones[], int maxInscripciones)
+{
+    char opcion;
+
+    while ((opcion = escogerModoReportes()) != 'h') 
+    {
+        switch(opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
+        {
+            case 'a':
+                // listaAlumnos();
+                break;
+
+            case 'b':
+                // listaMaterias();
+                break;
+
+            case 'c':
+                // listaGrupos();
+                break;
+
+            case 'd':
+                // listaInscripciones();
+                break;
+
+            case 'e':
+                // generarArchivoAlum();
+                break;
+
+            case 'f':
+                // generarArchivoProf();
+                break;
+                
+            case 'g':
+                // abrirArchivo();
+                break;
+            
+        }
+    }
 }
