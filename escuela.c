@@ -722,25 +722,25 @@ void listaGrupos(struct datosGrupo grupos[],struct fecha fechas[], int maxGrupos
             do
             {
                 printf("\ta) A%co: ", 164); // 164 = ñ
-                scanf("%d", &fechas[*offset].fechaNac.aaaa);
-            } while (!validarInt(fechas[*offset].fechaNac.aaaa, 1900, __INT_MAX__, "(]"));
+                scanf("%d", &fechas[*offset].aaaa);
+            } while (!validarInt(fechas[*offset].aaaa, 1900, __INT_MAX__, "(]"));
 
             do
             {
                 printf("\tb) Mes: ");
-                scanf("%d", &grupos[*offset].fechaNac.mm);
-            } while (!validarInt(grupos[*offset].fechaNac.mm, 1, 12, "[]"));
+                scanf("%d", &fechas[*offset].mm);
+            } while (!validarInt(fechas[*offset].mm, 1, 12, "[]"));
             
             do
             {
                 printf("\tc) Dia: ");
-                scanf("%d", &grupos[*offset].fechaNac.dd);
-            } while (!validarInt(grupos[*offset].fechaNac.mm, 1, 31, "[]"));
+                scanf("%d", &fechas[*offset].dd);
+            } while (!validarInt(fechas[*offset].mm, 1, 31, "[]"));
 
 
 
     for (i=0; i<maxGrupos; i++) {
-        if (clave==materias[i].clave) {
+        if (fechas[*offset]==grupos[i].fechaCreacion) {
             printf("Si funciona\n");
         }
     }
