@@ -67,6 +67,10 @@ void ingresarGrupos(struct datosGrupo *, int *, struct datosMateria [], int, str
 void inscripcion(struct datosInscripcion *, int *, struct datosGrupo [], int, struct datosAlumno [], int);
 void menuReportes(struct datosAlumno [], int, struct datosProfesor [], int, struct datosMateria [], int,
     struct datosGrupo [], int, struct datosInscripcion [], int);
+void listaAlumnos();
+void listaMaterias();
+void listaGrupos();
+void listaInscripcion();
 
 int main()
 {
@@ -617,7 +621,7 @@ void inscripcion(struct datosInscripcion *inscripciones, int *offset,
             do
             {
                 printf("Ingrese el numero de grupo\n? " );
-                scanf("%d", &grupos[*offset].numGrupo);
+                scanf("%d", &inscripciones[*offset].numGrupo);
             } while (!validarInt(inscripciones[*offset].numGrupo, 0, __INT_MAX__, "(]"));
         } while (!buscarGrupo(grupos, inscripciones[*offset].numGrupo, maxGrupos));
                    
@@ -626,11 +630,18 @@ void inscripcion(struct datosInscripcion *inscripciones, int *offset,
             do
             {
                 printf("\n2) Matricula (Mayor que cero): ");
-                scanf("%ld", &alumnos[*offset].matricula);
+                scanf("%ld", &inscripciones[*offset].matricula);
             } while (!validarInt(inscripciones[*offset].matricula, 0,  __INT_MAX__, "(]")); // (0, maximo]
         } while (buscarAlumno(alumnos, inscripciones[*offset].matricula, maxAlumnos)); // Validar que no exista ya, el -1 es para que no se encuentre a si mismo
 
         grupos[*offset].fechaCreacion = obtenerFechaActual();
+        
+        do
+        {
+            printf("\nAgregar otro grupo? (s/n)\n? ");
+            fflush(stdin);
+            scanf("%c", &res);
+        } while (!validarRes(res));
 
     } while (res == 's' && *offset < 100);
 }
@@ -659,6 +670,79 @@ char escogerModoReportes()
     return opcionMenuR;
 }
 
+void listaAlumnos(struct datosAlumno alumnos[], int maxAlumnos)
+{
+
+    char carrera[40];
+    int i;
+    printf("Carrera: \n");
+    scanf("%s", carrera);
+
+    for (i=0; i<maxAlumnos; i++) {
+        if (strncmp(carrera, alumnos[i].carrera, strlen(carrera))) {
+            printf("Si funciona\n");
+        }
+    }
+}
+void listaMaterias(struct datosMateria materias[], int maxMaterias)
+{
+
+    int i, clave;
+    printf("Clave Profesor: \n");
+    scanf("%d", &clave);
+
+    for (i=0; i<maxMaterias; i++) {
+        if (clave==materias[i].clave) {
+            printf("Si funciona\n");
+        }
+    }
+}
+void listaGrupos(struct datosGrupo grupos[],struct fecha fechas[], int maxGrupos, int *offset)
+{
+
+    int i;
+    printf("Ingresar la fecha: \n");
+            do
+            {
+                printf("\ta) A%co: ", 164); // 164 = ñ
+                scanf("%d", &fechas[*offset].fechaNac.aaaa);
+            } while (!validarInt(fechas[*offset].fechaNac.aaaa, 1900, __INT_MAX__, "(]"));
+
+            do
+            {
+                printf("\tb) Mes: ");
+                scanf("%d", &grupos[*offset].fechaNac.mm);
+            } while (!validarInt(grupos[*offset].fechaNac.mm, 1, 12, "[]"));
+            
+            do
+            {
+                printf("\tc) Dia: ");
+                scanf("%d", &grupos[*offset].fechaNac.dd);
+            } while (!validarInt(grupos[*offset].fechaNac.mm, 1, 31, "[]"));
+
+
+
+    for (i=0; i<maxGrupos; i++) {
+        if (clave==materias[i].clave) {
+            printf("Si funciona\n");
+        }
+    }
+}
+void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripciones)
+{
+
+    int i, clave;
+    printf("Clave Profesor: \n");
+    scanf("%d", &clave);
+
+    for (i=0; i<maxMaterias; i++) {
+        if (clave==materias[i].clave) {
+            printf("Si funciona\n");
+        }
+    }
+}
+
+
 void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProfesor profesores[], int maxProfesores,
     struct datosMateria materias[], int maxMaterias, struct datosGrupo grupos[], int maxGrupos,
     struct datosInscripcion inscripciones[], int maxInscripciones)
@@ -670,11 +754,11 @@ void menuReportes(struct datosAlumno alumnos[], int maxAlumnos, struct datosProf
         switch(opcion) // A las funciones se les pasa el apuntador al array correspondiente, y en algunos casos el indice donde se debe guardar
         {
             case 'a':
-                // listaAlumnos();
+                listaAlumnos(alumnos, maxAlumnos);
                 break;
 
             case 'b':
-                // listaMaterias();
+                listaMaterias(materias, maxMaterias);
                 break;
 
             case 'c':
