@@ -474,7 +474,8 @@ void ingresarProfesores(struct datosProfesor *profesores, int *offset)
     } while (res == 's' && *offset < 100);
 }
 
-void ingresarGrupos(struct datosGrupo *grupos, int *offset, struct datosMateria materias[], int maxMaterias, struct datosProfesor profesores[], int maxProfesores)
+void ingresarGrupos(struct datosGrupo *grupos, int *offset,
+    struct datosMateria materias[], int maxMaterias, struct datosProfesor profesores[], int maxProfesores)
 {
     char res;
     int i, j;
