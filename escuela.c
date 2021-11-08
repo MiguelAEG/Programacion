@@ -47,10 +47,10 @@ bool validarFecha(struct fecha, struct fecha);
 bool validarInt(int, int, int, char[2]);
 bool validarString(char *, int, int);
 
-bool buscarMateria(struct datosMateria *, int, int *);
-bool buscarProfesor(struct datosProfesor *, int, int *);
-bool buscarGrupo(struct datosGrupo *, int, int *);
-bool buscarAlumno(struct datosAlumno *, int, int *);
+bool buscarMateria(struct datosMateria *, int, int);
+bool buscarProfesor(struct datosProfesor *, int, int);
+bool buscarGrupo(struct datosGrupo *, int, int);
+bool buscarAlumno(struct datosAlumno *, int, int);
 
 struct fecha obtenerFechaActual();
 int escogerModo(void);
@@ -157,7 +157,7 @@ bool validarString(char *validando, int minL, int maxL)
     return valido;
 }
 
-bool buscarMateria(struct datosMateria *materias, int busqueda, int *max)
+bool buscarMateria(struct datosMateria *materias, int busqueda, int max)
 {
     int i;
     bool encontrado = false;
@@ -174,7 +174,7 @@ bool buscarMateria(struct datosMateria *materias, int busqueda, int *max)
     return encontrado;
 }
 
-bool buscarProfesor(struct datosProfesor *profesores, int busqueda, int *max)
+bool buscarProfesor(struct datosProfesor *profesores, int busqueda, int max)
 {
     int i;
     bool encontrado = false;
@@ -191,7 +191,7 @@ bool buscarProfesor(struct datosProfesor *profesores, int busqueda, int *max)
     return encontrado;
 }
 
-bool buscarGrupo(struct datosGrupo *grupos, int busqueda, int *max)
+bool buscarGrupo(struct datosGrupo *grupos, int busqueda, int max)
 {
     int i;
     bool encontrado = false;
@@ -208,7 +208,7 @@ bool buscarGrupo(struct datosGrupo *grupos, int busqueda, int *max)
     return encontrado;
 }
 
-bool buscarAlumno(struct datosAlumno *alumnos, int busqueda, int *max)
+bool buscarAlumno(struct datosAlumno *alumnos, int busqueda, int max)
 {
     int i;
     bool encontrado = false;
