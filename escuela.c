@@ -82,18 +82,18 @@ int main()
 {
     int opcion, contAlumnos, contProfesores, contGrupos, contInscripciones, contMaterias;
     struct datosAlumno listaAlumnos[100] = {
-        {.matricula = 1212143, .telefono = 4343434343LL, .nombre = "Cesar", .carrera = "Computacion", .correo = "@.", .semestre = 7, .fechaNac = {.dd = 5, .mm = 9, .aaaa = 2002}},
-        {.matricula = 1919142, .telefono = 8282854528LL, .nombre = "Pepe", .carrera = "Dibujo", .correo = "pepe@gmail.com", .semestre = 3, .fechaNac = {.dd = 2, .mm = 2, .aaaa = 2002}},
-        {.matricula = 1818182, .telefono = 8898484848LL, .nombre = "Miguel", .carrera = "Computacion", .correo = "miguel@gmail.com", .semestre = 2, .fechaNac = {.dd = 4, .mm = 1, .aaaa = 2002}},
-        {.matricula = 1982823, .telefono = 8118234543LL, .nombre = "Juan", .carrera = "Computacion", .correo = "juan@gmail.com", .semestre = 1, .fechaNac = {.dd = 1, .mm = 3, .aaaa = 2010}},
-        {.matricula = 1234323, .telefono = 9292921763LL, .nombre = "Jose", .carrera = "Dibujo", .correo = "jose@gmail.com", .semestre = 5, .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2020}}
+        {.matricula = 1212143, .telefono = 4343434343LL, .nombre = "Cesar", .carrera = "Computacion", .correo = "cesar@hotmail.", .semestre = 7, .fechaNac = {.dd = 5, .mm = 9, .aaaa = 2002}},
+        {.matricula = 1818182, .telefono = 8898484848LL, .nombre = "Miguel", .carrera = "Computacion", .correo = "miguel@yahoo.com", .semestre = 2, .fechaNac = {.dd = 4, .mm = 1, .aaaa = 2002}},
+        {.matricula = 1919142, .telefono = 8282854528LL, .nombre = "Valente", .carrera = "Matematicas", .correo = "Valente@gmail.com", .semestre = 3, .fechaNac = {.dd = 2, .mm = 2, .aaaa = 2002}},
+        {.matricula = 1982823, .telefono = 8118234543LL, .nombre = "Brian", .carrera = "Fisica", .correo = "Brian@gmail.com", .semestre = 1, .fechaNac = {.dd = 1, .mm = 3, .aaaa = 2010}},
+        {.matricula = 1234323, .telefono = 9292921763LL, .nombre = "Jose", .carrera = "Fisica", .correo = "jose@gmail.com", .semestre = 5, .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2020}}
     }; // A lo mucho 100 alumnos
     struct datosProfesor listaProfesores[100] = {
-        {.telefono = 5434424253LL, .numEmpleado = 11, .coordinacion = 3, .nombre = "Alguien", .correo = "alguien@gmail.com", .fechaNac = {.dd = 1, .mm = 3, .aaaa = 1997}},
+        {.telefono = 5434424253LL, .numEmpleado = 11, .coordinacion = 3, .nombre = "Juan", .correo = "juan@gmail.com", .fechaNac = {.dd = 1, .mm = 3, .aaaa = 1997}},
         {.telefono = 1029394939LL, .numEmpleado = 14, .coordinacion = 1, .nombre = "Pablo", .correo = "pablo@gmail.com", .fechaNac = {.dd = 1, .mm = 2, .aaaa = 1960}},
-        {.telefono = 2029394939LL, .numEmpleado = 254, .coordinacion = 2, .nombre = "Tenorio", .correo = "tenorio@gmail.com", .fechaNac = {.dd = 2, .mm = 3, .aaaa = 2020}},
+        {.telefono = 2029394939LL, .numEmpleado = 254, .coordinacion = 2, .nombre = "Pepe", .correo = "pepe@gmail.com", .fechaNac = {.dd = 2, .mm = 3, .aaaa = 2020}},
         {.telefono = 3029394939LL, .numEmpleado = 32, .coordinacion = 3, .nombre = "Luis", .correo = "luis@gmail.com", .fechaNac = {.dd = 3, .mm = 4, .aaaa = 1978}},
-        {.telefono = 4029394939LL, .numEmpleado = 44, .coordinacion = 4, .nombre = "Jose", .correo = "jose@gmail.com", .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2012}}
+        {.telefono = 4029394939LL, .numEmpleado = 44, .coordinacion = 4, .nombre = "Alex", .correo = "alex@gmail.com", .fechaNac = {.dd = 4, .mm = 5, .aaaa = 2012}}
     }; // A lo mucho 100 profesores
     struct datosGrupo listaGrupos[100] = {
         {.numGrupo = 543, .semestre = 2, .materias = {31, 13, 21}, .profesores = {14, 14, 254}, .fechaCreacion = {.dd = 27, .mm = 10, .aaaa = 2021}},
@@ -783,11 +783,11 @@ void listaInscripciones(struct datosInscripcion inscripciones[], int maxInscripc
     printf("Ingrese el grupo: \n");
     scanf("%d", &grupo);
 
-    printf("\n%-20s%-18s%-18s\n", "Fecha Inscripcion", "Num grupo", "Matricula");
+    printf("\n%-18s %-10s %-10s\n", "Fecha Inscripcion", "Num grupo", "Matricula");
     for (i = 0; i < maxInscripciones; i++)
     {
         if (grupo == inscripciones[i].numGrupo)
-            printf("%4d/%02d/%02d%-18d%-18ld\n", inscripciones[i].fechaCreacion.aaaa, inscripciones[i].fechaCreacion.mm, inscripciones[i].fechaCreacion.dd, inscripciones[i].numGrupo, inscripciones[i].matricula);
+            printf("%4d/%02d/%02d          %-10d %-10ld\n", inscripciones[i].fechaCreacion.aaaa, inscripciones[i].fechaCreacion.mm, inscripciones[i].fechaCreacion.dd, inscripciones[i].numGrupo, inscripciones[i].matricula);
     }
 }
 
